@@ -27,6 +27,9 @@ Confirm that you have:
   them. You paste the Gemini key into `.env` when the session asks for it, and the
   OpenRouter key at stage 6; paste neither before the session.
 - A Vercel account, signed in with the same GitHub account.
+- The stage guide page, `stage-guide.html`, which you receive before the session, saved in
+  this folder next to `check.py`. It is the worksheet for every stage, and `.gitignore`
+  keeps it out of your pushes.
 - OpenCode installed in the same terminal (WSL for Windows), with the Google provider
   connected to your Gemini key; the tutor runs on Gemini, and `/models` inside OpenCode
   switches it to another model if Gemini refuses. If it is not installed yet, follow the
@@ -60,7 +63,7 @@ command; without it, macOS answers "command not found: python" and WSL answers
 | Deploy | 9 | the root files `app.py`, `index.html` and `test_chat.py`; the steps are in `03_deploy/README.md` |
 | Customise | 10 | see `04_customise/MODIFY.md` |
 
-The stage guide page, which you receive before the session, is the worksheet for every stage, with the
+Open `stage-guide.html` in your browser: it is the worksheet for every stage, with the
 learning moment, the mental model, the new lines and the predict question with a reveal.
 
 Each stage script starts with a header that says what the stage adds, why, and the question
