@@ -1,0 +1,26 @@
+---
+name: stage-8
+description: Course notes for stage 8 of the chatbot course (02_web/stage8/app.py and 02_web/stage8/index.html): what the stage adds, the predict question, the expected behaviour and the common fixes. Load when the learner asks about stage 8 or about 02_web/stage8/app.py and 02_web/stage8/index.html.
+metadata:
+  opencode/autoinvoke: "true"
+---
+# Stage 8: 02_web/stage8/app.py and 02_web/stage8/index.html
+
+## What this stage adds
+
+One route GET / sends the page. The page keeps the list in a JavaScript array named history, sends all of it to /chat on every turn, and appends the reply. Nothing else changes; test_chat.py still passes.
+
+## The predict question
+
+After you refresh the page, what does the chatbot remember?
+
+## What the learner should see
+
+Open http://localhost:8000, type the three memory turns, and the memory test passes. Refresh the page and type turn 2 again: the model cannot name Sunday, because the array was created empty again when the page loaded. The browser's developer tools (macOS: Command, Option and I; Windows: F12; then the Network tab) shows the request named chat and its body, which is the whole list.
+
+## Common messages and what they mean
+
+- 'Method Not Allowed' means the address /chat was typed into the browser; go back to the page address.
+- '"GET /favicon.ico HTTP/1.1" 404' in the server log means the browser asked for a tab icon and there is none. 404 is the status number for not found; the page works without an icon.
+- If the page looks unchanged after an edit, refresh it.
+- The page does not load: the server is not running, or the address is not localhost:8000.

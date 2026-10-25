@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chatbot Stage Guide</title>
+<style>
+  /* Layout: a fixed stage list on the left at desktop width, one column on a phone; each stage is one section with four parts in a fixed order. */
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --fg: #1f2a2a;
+    --muted: #5b6a6a;
+    --line: #d9d6cc;
+    --accent: #1a5f5f;
+    --accent-soft: #e6f0ef;
+    --mark: #d47a3a;
+    --code-bg: #f0efe9;
+    --font-body: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-code: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161a1a; --surface: #1f2525; --fg: #e8e6df; --muted: #a3ada9; --line: #343c3c;
+      --accent: #7fc4bf; --accent-soft: #233434; --mark: #e39a63; --code-bg: #121616; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #161a1a; --surface: #1f2525; --fg: #e8e6df; --muted: #a3ada9; --line: #343c3c;
+    --accent: #7fc4bf; --accent-soft: #233434; --mark: #e39a63; --code-bg: #121616; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+    padding-block: 0; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .wrap { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; max-width: 1080px; margin: 0 auto; }
+  nav { position: sticky; top: 0; align-self: start; padding-block: 28px; }
+  nav h1 { font-size: 1.05rem; margin: 0 0 4px; letter-spacing: 0.01em; }
+  nav p { margin: 0 0 16px; color: var(--muted); font-size: 0.9rem; }
+  nav ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  nav a { display: block; padding: 6px 10px; border-left: 3px solid transparent; color: var(--fg); text-decoration: none; font-size: 0.92rem; border-radius: 0 6px 6px 0; }
+  nav a:hover, nav a:focus-visible { background: var(--accent-soft); outline: none; }
+  nav a.block { margin-top: 10px; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-left: 10px; pointer-events: none; }
+  main { padding-block: 28px 64px; min-width: 0; }
+  .intro { max-width: 68ch; }
+  .intro h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 12px; text-wrap: balance; }
+  .intro p { margin: 0 0 12px; }
+  .sentences { display: grid; gap: 8px; margin: 20px 0 0; padding: 0; list-style: none; }
+  .sentences li { padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--surface); }
+  section.stage { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); max-width: 72ch; }
+  .eyebrow { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
+  section.stage h2 { font-size: 1.45rem; line-height: 1.25; margin: 0 0 18px; text-wrap: balance; }
+  .part { margin-top: 22px; }
+  .part h3 { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  .part p { margin: 0 0 8px; }
+  .moment { font-size: 1.08rem; }
+  .model { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+  .chip { font-family: var(--font-code); font-size: 0.82rem; padding: 4px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--code-bg); }
+  .chip.sys { border-color: var(--accent); }
+  .chip.gone { opacity: 0.45; text-decoration: line-through; }
+  .chip.new { border-color: var(--mark); }
+  .arrow { color: var(--muted); font-size: 0.85rem; }
+  .who { width: 100%; margin: 0; color: var(--muted); font-size: 0.9rem; }
+  pre { margin: 0; padding: 14px 16px; background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; font-family: var(--font-code); font-size: 0.85rem; line-height: 1.5; }
+  pre .new { color: var(--mark); }
+  pre .label { color: var(--accent); }
+  details { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 0; }
+  summary { cursor: pointer; padding: 12px 16px; font-weight: 600; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "+ "; color: var(--accent); }
+  details[open] summary::before { content: "\2212\00a0"; }
+  details .answer { padding: 0 16px 14px; border-top: 1px solid var(--line); }
+  details .answer p { margin: 10px 0 0; }
+  .predict-q { padding: 12px 16px; background: var(--accent-soft); border-radius: 8px; margin-bottom: 10px; }
+  .investigate ol { margin: 0; padding-left: 20px; }
+  .investigate li { margin-bottom: 6px; }
+  .tests { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .tests label { display: flex; gap: 10px; align-items: flex-start; padding: 8px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
+  .tests input { margin-top: 4px; accent-color: var(--accent); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .table-wrap { overflow-x: auto; }
+  code { font-family: var(--font-code); font-size: 0.9em; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+  a:focus-visible, summary:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (max-width: 760px) {
+    .wrap { grid-template-columns: 1fr; gap: 0; }
+    nav { position: static; padding-block: 20px 8px; }
+    nav ol { display: flex; flex-wrap: wrap; gap: 6px; }
+    nav a { border: 1px solid var(--line); border-left-width: 1px; border-radius: 999px; padding: 4px 10px; }
+    nav a.block { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="Stages">
+  <h1>Chatbot Stage Guide</h1>
+  <p>Build an AI chatbot in Python</p>
+  <ol>
+    <li><a href="#how">How to use this page</a></li>
+    <li><a class="block">Base</a></li>
+    <li><a href="#s0">0 · Your laptop is ready</a></li>
+    <li><a href="#s1">1 · One call, one reply</a></li>
+    <li><a href="#s2">2 · The system entry</a></li>
+    <li><a href="#s3">3 · A loop with no memory</a></li>
+    <li><a href="#s4">4 · The list is the memory</a></li>
+    <li><a href="#s5">5 · Trimming the list</a></li>
+    <li><a href="#s6">6 · Swapping the provider</a></li>
+    <li><a class="block">Web interface</a></li>
+    <li><a href="#s7">7 · A web route</a></li>
+    <li><a href="#s8">8 · The page keeps the list</a></li>
+    <li><a class="block">Deploy</a></li>
+    <li><a href="#s9">9 · On Vercel, with a passphrase</a></li>
+    <li><a class="block">Customise</a></li>
+    <li><a href="#s10">10 · Make it yours</a></li>
+  </ol>
+</nav>
+<main>
+
+<div class="intro" id="how">
+  <h1>One chatbot grows a few lines at a time over eleven stages</h1>
+  <p>This page is your worksheet. Each stage has the same six parts in the same order. They are the learning moment, the mental model, the lines to think about, the predict question, the investigate questions and the tests. They are the one thing the stage teaches, a picture of what the model receives, the new lines, and a question to answer before you run. Open the reveal only after you have written your prediction.</p>
+  <p>Every command is typed at the root of your repository, in a terminal whose prompt shows (.venv); a new terminal tab needs <code>source .venv/bin/activate</code> before its first python command. Type <code>quit</code> to end a loop. The three tests at the end of each stage are the same at every stage: the behaviour test, the memory test and the budget test. Tick them as you go; the ticks are kept in your browser.</p>
+  <ul class="sentences" aria-label="The three sentences of the course">
+    <li>The model receives only what is in the list.</li>
+    <li>The program keeps the list; the model keeps nothing.</li>
+    <li>The code reads the key from the environment file.</li>
+  </ul>
+</div>
+
+<section class="stage" id="s0">
+  <p class="eyebrow">Stage 0 · Base · check.py</p>
+  <h2>Your laptop, keys and accounts are ready</h2>
+  <div class="part"><h3>The learning moment</h3><p class="moment">The key is not part of the program. The code reads it from one file, <code>.env</code>, at the root, and that file is never uploaded to GitHub.</p></div>
+  <div class="part"><h3>The mental model</h3>
+    <div class="model"><span class="chip">.env at the root</span><span class="arrow">is read by</span><span class="chip">check.py</span><span class="chip">01_base/stage1.py</span><span class="chip">02_web/stage8/app.py</span><span class="chip">app.py</span><p class="who">One file is used by every stage, because the library looks for <code>.env</code> in the script's folder and in every folder above it.</p></div>
+  </div>
+  <div class="part"><h3>The lines to think about</h3>
+<pre><code><span class="label"># 5. The key. The code reads it from .env; it is never written in this file.</span>
+key = os.getenv("LLM_API_KEY", "")
+if not key or key.startswith("paste-"):
+    print("LLM_API_KEY is not set yet. You will paste it into .env in the session. Nothing else to do now.")
+    sys.exit()</code></pre></div>
+  <div class="part"><h3>Predict, then run</h3>
+    <p class="predict-q">Now that your key is in <code>.env</code>, which line will <code>python check.py</code> print last?</p>
+    <details><summary>What you should see</summary><div class="answer"><p>"Your laptop is ready. Models available: models/gemini-3.5-flash-lite, ..." The names carry a <code>models/</code> prefix; the name written into <code>.env</code> is the part after the slash.</p><p>If the last line is a different one, read it: it says what to fix and which command to run again.</p></div></details>
+  </div>
+  <div class="part investigate"><h3>Investigate</h3><ol><li>Which line reads the key, and which file holds it?</li><li>Open <code>.gitignore</code>. Which line keeps <code>.env</code> out of GitHub?</li></ol></div>
+</section>
+
+<section class="stage" id="s1">
+  <p class="eyebrow">Stage 1 · Base · 01_base/stage1.py</p>
+  <h2>One call returns one reply that differs on every run</h2>
+  <div class="part"><h3>The learning moment</h3><p class="moment">The model chooses among likely next tokens, so the same question gives a different answer each run, even at temperature zero. A token is a piece of text the model reads and writes; the provider counts tokens and charges for them.</p></div>
+  <div class="part"><h3>The mental model</h3>
+    <div class="model"><span class="chip">user: Suggest one name…</span><span class="arrow">the whole list is sent to</span><span class="chip">the model</span><span class="arrow">which returns</span><span class="chip">one reply</span><p class="who">The list has one entry. The model receives only what is in the list.</p></div>
+  </div>
+  <div class="part"><h3>The lines to think about</h3>
+<pre><code><span class="label"># 2. Build the list. The model receives only what is in this list.</span>
+messages = [
+    {"role": "user", "content": "Suggest one name for a small café by the sea ..."},
+]
+<span class="label"># 3. Call the model</span>
+response = client.chat.completions.create(
+    model=os.getenv("LLM_MODEL"),
+    messages=messages,
+    # temperature=0,   <span class="new"># remove the # to make replies more similar</span>
+)</code></pre></div>
+  <div class="part"><h3>Predict, then run</h3>
+    <p class="predict-q">Will a second run print exactly the same reply as the first?</p>
+    <details><summary>What you should see</summary><div class="answer"><p>Two different names. With the temperature line uncommented, two runs are usually similar, sometimes identical, and never guaranteed identical, because the provider's hardware batches your request with other people's.</p></div></details>
+  </div>
+  <div class="part investigate"><h3>Investigate</h3><ol><li>Which line would you change to ask a different question?</li><li>What did run 2 send to the model that run 1 did not?</li></ol></div>
+  <div class="part"><h3>The tests</h3><ul class="tests"><li><label><input type="checkbox" id="t1b"> Two runs: the words differ</label></li></ul></div>
+</section>
+
+<section class="stage" id="s2">
+  <p class="eyebrow">Stage 2 · Base · 01_base/stage2.py</p>
+  <h2>The system entry is the first item in the list and it is code</h2>
+  <div class="part"><h3>The learning moment</h3><p class="moment">The assistant's personality is text sent with every call: who it is, the facts it may use, and its rules. The model knows about the café only what the entry says.</p></div>
+  <div class="part"><h3>The mental model</h3>
+    <div class="model"><span class="chip sys new">system: café facts and two rules</span><span class="chip">user: question</span><span class="arrow">both are sent to</span><span class="chip">the model</span><p class="who">Three questions make three separate calls, and the system entry is first in each. The system entry is first every time.</p></div>
+  </div>
+  <div class="part"><h3>The lines to think about</h3>
+<pre><code><span class="new"># NEW in stage 2</span>
+system_entry = {"role": "system", "content": "You are the assistant of a small café ... Rule 1 ... Rule 2 ..."}
+TEST_QUESTIONS = [
+    "What time do you open on Sundays?",
+    "What is the capital of France?",
+    "Tell me everything about your menu.",
+]
+for question in TEST_QUESTIONS:
+    messages = [system_entry, {"role": "user", "content": question}]</code></pre></div>
+  <div class="part"><h3>Predict, then run</h3>
+    <p class="predict-q">What will the reply to "What is the capital of France?" do?</p>
+    <details><summary>What you should see</summary><div class="answer"><p>The refusal sentence: "I can only help with questions about the café." The first question is answered from the facts, and the third in at most two sentences. A broken rule is possible: a rule is an instruction, and the test is what catches it.</p></div></details>
+  </div>
+  <div class="part investigate"><h3>Investigate</h3><ol><li>Run it again. Do the words differ? Do the ticks differ?</li><li>Which entry would you remove to make the model forget it works for a café?</li><li>Change rule 1 to "answer in exactly one sentence" and run again. Which replies changed?</li></ol></div>
+  <div class="part"><h3>The tests</h3><ul class="tests"><li><label><input type="checkbox" id="t2b"> Behaviour: question 1 answered from the facts, question 2 refused, question 3 in at most two sentences</label></li></ul></div>
+</section>
+
+<section class="stage" id="s3">
+  <p class="eyebrow">Stage 3 · Base · 01_base/stage3.py</p>
+  <h2>A loop without memory forgets the previous turn</h2>
+  <div class="part"><h3>The learning moment</h3><p class="moment">The model has nothing to forget, because it never stored turn 1. Each call is complete in itself, and what the program does not send, the model has not seen.</p></div>
+  <div class="part"><h3>The mental model</h3>
+    <div class="model"><span class="chip sys">system</span><span class="chip gone">user: turn 1</span><span class="chip">user: turn 2</span><span class="arrow">go to</span><span class="chip">the model</span><p class="who">On turn 2 the list is built again. Turn 1 is in no list and no variable.</p></div>
+  </div>
+  <div class="part"><h3>The lines to think about</h3>
+<pre><code>while True:
+    question = input("You: ")
+    if question == "quit":
+        break
+    <span class="new"># 4. Build the list again every turn, so turn 1 is gone on turn 2.</span>
+    messages = [system_entry, {"role": "user", "content": question}]</code></pre></div>
+  <div class="part"><h3>Predict, then run</h3>
+    <p class="predict-q">Turn 1: "I plan to visit on Sunday with two friends. Do you serve tea?" Turn 2: "Will you be open on the day I mentioned?" What will the model say to turn 2?</p>
+    <details><summary>What you should see</summary><div class="answer"><p>The model asks which day, gives the opening times for every day, or gives the refusal sentence. All three are the same failure: the reply does not name Sunday, because turn 1 is not in the list on turn 2. This is the designed failure.</p></div></details>
+  </div>
+  <div class="part investigate"><h3>Investigate</h3><ol><li>Draw the list the program sent on turn 2: one box per entry, with its role.</li><li>Where in the code is turn 1 after turn 2 begins?</li><li>Write one line: what would you add so that the model sees turn 1 on turn 2?</li></ol></div>
+  <div class="part"><h3>The tests</h3><ul class="tests"><li><label><input type="checkbox" id="t3m"> Memory: turn 2 fails, as designed</label></li></ul></div>
+</section>
+
+<section class="stage" id="s4">
+  <p class="eyebrow">Stage 4 · Base · 01_base/stage4.py</p>
+  <h2>The messages list is the memory, and the program sends all of it every time</h2>
+  <div class="part"><h3>The learning moment</h3><p class="moment">The chatbot remembers because the program appends every turn and every reply to one list and sends the whole list on every call. The model still keeps nothing.</p></div>
+  <div class="part"><h3>The mental model</h3>
+    <div class="model"><span class="chip sys">system</span><span class="chip">user 1</span><span class="chip new">assistant 1</span><span class="chip">user 2</span><span class="chip new">assistant 2</span><span class="chip">user 3</span><span class="arrow">all six are sent to</span><span class="chip">the model</span><p class="who">The list is created once, before the loop, and grows by two entries per turn. The program keeps it; the model keeps nothing.</p></div>
+  </div>
+  <div class="part"><h3>The lines to think about</h3>
+<pre><code><span class="new"># 3. Create the list once, outside the loop. This list is the memory.</span>
+history = [system_entry]
+while True:
+    ...
+    <span class="new"># 4. The typed turn joins the list.</span>
+    history.append({"role": "user", "content": question})
+    <span class="new"># 5. Send the whole list, every time.</span>
+    response = client.chat.completions.create(
+        model=os.getenv("LLM_MODEL"),
+        messages=history,
+    )
+    <span class="new"># 6. The reply joins the list too; print it with the number of tokens sent.</span>
+    reply = response.choices[0].message.content
+    history.append({"role": "assistant", "content": reply})
+    tokens = response.usage.prompt_tokens if response.usage else "unknown"
+    print("tokens sent:", tokens)</code></pre></div>
+  <div class="part"><h3>Predict, then run</h3>
+    <p class="predict-q">Turn 3: "How many cups of tea will we need for all of us on that day?" Will the reply refer to the Sunday visit or the group of three? Will the tokens number on turn 3 be bigger than on turn 1?</p>
+    <details><summary>What you should see</summary><div class="answer"><p>Turn 2 names Sunday. Turn 3 refers to the Sunday visit or to your group of three. The tokens number grows every turn, from about 105 to about 200, because the whole list, replies included, is sent each time. Do not test memory with "what was my last question?": that question is not about the café, so rule 2 refuses it even though the list was sent. The three fixed turns ask about the café in a way that only turn 1 can answer.</p></div></details>
+  </div>
+  <div class="part investigate"><h3>Investigate</h3><ol><li>You typed one short line on turn 3. Why did the number grow by so much?</li><li>What is the largest the number could become?</li><li>Three broken variants: the list created inside the loop; the reply never appended; the call sends only the latest turn. For each, which entries reach the model on turn 3, which test turn fails, and which printed number reveals it?</li></ol></div>
+  <div class="part"><h3>The tests</h3><ul class="tests"><li><label><input type="checkbox" id="t4m"> Memory: turn 2 names Sunday; turn 3 refers to the visit or the group</label></li><li><label><input type="checkbox" id="t4u"> Budget: the tokens number grows every turn</label></li></ul></div>
+</section>
+
+<section class="stage" id="s5">
+  <p class="eyebrow">Stage 5 · Base · 01_base/stage5.py</p>
+  <h2>The history has a token budget, and trimming keeps it inside</h2>
+  <div class="part"><h3>The learning moment</h3><p class="moment">Every chatbot trims its history at some point: where its author set a limit, or where the context window ends. The list has a largest size, the context window, and a cost, the tokens sent.</p></div>
+  <div class="part"><h3>The mental model</h3>
+    <div class="model"><span class="chip sys">system, always kept</span><span class="chip gone">user 1</span><span class="chip gone">assistant 1</span><span class="chip gone">user 2</span><span class="chip">assistant 2</span><span class="chip">user 3</span><span class="arrow">three are sent to</span><span class="chip">the model</span><p class="who">At KEEP = 2, the last two entries follow the system entry. The oldest turns are dropped first.</p></div>
+  </div>
+  <div class="part"><h3>The lines to think about</h3>
+<pre><code><span class="new"># 3. ... set how many recent entries are kept. Two entries make one turn.</span>
+KEEP = 2
+    ...
+    history.append({"role": "user", "content": question})
+    <span class="new"># 4. ... the list is trimmed. The system entry is always kept.</span>
+    if len(history) &gt; KEEP + 1:
+        history = [history[0]] + history[-KEEP:]</code></pre></div>
+  <div class="part"><h3>Predict, then run</h3>
+    <p class="predict-q">KEEP is 2, which is one turn. Which memory test turn fails first?</p>
+    <details><summary>What you should see</summary><div class="answer"><p>Turn 2 fails: turn 1 was dropped before turn 2 was sent. Sometimes Sunday is still in the list because the first reply repeated it; a fact remains after trimming only when a later entry repeated it. Set KEEP to 6 and every turn passes, at the highest tokens number.</p></div></details>
+  </div>
+  <div class="part investigate"><h3>Investigate</h3><ol><li>Which entry is never dropped, and why?</li><li>Write one sentence: which KEEP would you choose for the café's deployed chatbot, naming what it must remember and what it costs?</li></ol></div>
+  <div class="part"><h3>The tests</h3><ul class="tests"><li><label><input type="checkbox" id="t5m"> Memory: fails at KEEP 2, passes at KEEP 6</label></li><li><label><input type="checkbox" id="t5u"> Budget: the tokens number on the last turn stays under 300</label></li></ul></div>
+</section>
+
+<section class="stage" id="s6">
+  <p class="eyebrow">Stage 6 · Base · .env only</p>
+  <h2>The provider is three environment variables</h2>
+  <div class="part"><h3>The learning moment</h3><p class="moment">Nothing in the code names the provider. Changing three values in <code>.env</code> is all that a change of provider needs.</p></div>
+  <div class="part"><h3>The mental model</h3>
+    <div class="model"><span class="chip">LLM_BASE_URL</span><span class="chip">LLM_API_KEY</span><span class="chip">LLM_MODEL</span><span class="arrow">are read by the same two client lines in</span><span class="chip">01_base/stage5.py, unchanged</span><p class="who">Put a # in front of the Gemini block, remove it from the OpenRouter block, and run the same script.</p></div>
+  </div>
+  <div class="part"><h3>The lines to think about</h3>
+<pre><code># LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
+# LLM_API_KEY=paste-your-gemini-key-here
+# LLM_MODEL=gemini-3.5-flash-lite
+<span class="new">LLM_BASE_URL=https://openrouter.ai/api/v1
+LLM_API_KEY=paste-your-openrouter-key-here
+LLM_MODEL=paste-a-model-name-ending-in-:free</span></code></pre></div>
+  <div class="part"><h3>Predict, then run</h3>
+    <p class="predict-q">Which of the three tests will give a different result on the free model: behaviour, memory, budget, or none?</p>
+    <details><summary>What you should see</summary><div class="answer"><p>The same three tests run, often with the same ticks. The tone and the speed may differ, the refusal rule may be weaker on a small model, and the tokens number may print as unknown. Free models allow about 20 requests a minute and 50 a day, are replaced without notice, and some may use your prompts for training. Do not type personal or client information into a free model. When the three tests are done, put the # back in front of the OpenRouter block and remove it from the Gemini block. Stages 7 to 9 then run on Gemini.</p></div></details>
+  </div>
+  <div class="part investigate"><h3>Investigate</h3><ol><li>Which lines of the program changed? Write the number.</li><li>For an application of your own, which provider would you choose, and what would change your mind?</li></ol></div>
+  <div class="part"><h3>The tests</h3><ul class="tests"><li><label><input type="checkbox" id="t6b"> Behaviour on the free model</label></li><li><label><input type="checkbox" id="t6m"> Memory on the free model</label></li><li><label><input type="checkbox" id="t6u"> Budget on the free model</label></li></ul></div>
+</section>
+
+<section class="stage" id="s7">
+  <p class="eyebrow">Stage 7 · Web interface · 02_web/stage7/app.py, and test_chat.py at the root</p>
+  <h2>A web route answers one chat request</h2>
+  <div class="part"><h3>The learning moment</h3><p class="moment">The server does not remember the conversation. Each request carries its own list, which is why many people can use one server without their conversations mixing.</p></div>
+  <div class="part"><h3>The mental model</h3>
+    <div class="model"><span class="chip">1. the page or test_chat.py sends the list</span><span class="arrow">to</span><span class="chip new">2. the route function POST /chat</span><span class="arrow">which</span><span class="chip">3. calls the model</span><span class="arrow">and</span><span class="chip">4. returns one reply</span><span class="arrow">which</span><span class="chip">5. the page shows</span><p class="who">One cycle of five steps, the same for the test client, the page and a visitor on Vercel. GET asks for a page; POST sends data. The server keeps nothing between two cycles.</p></div>
+  </div>
+  <div class="part"><h3>The lines to think about</h3>
+<pre><code><span class="new"># 4. The chat route: the caller's list arrives in the request body.</span>
+@app.post("/chat")
+def chat():
+    history = request.get_json()["history"]
+    <span class="new"># 5. Add the system entry and trim. The caller never holds the system entry.</span>
+    messages = [system_entry] + history[-KEEP:]
+    response = client.chat.completions.create(
+        model=os.getenv("LLM_MODEL"),
+        messages=messages,
+    )
+    <span class="new"># 7. Return one reply and the number of tokens sent. The server keeps nothing.</span>
+    return {"reply": reply, "tokens": tokens}</code></pre></div>
+  <div class="part"><h3>Predict, then run</h3>
+    <p class="predict-q">Terminal 1: <code>python 02_web/stage7/app.py</code>. Terminal 2, also with (.venv) in the prompt: <code>python test_chat.py</code>. Will the memory test pass through the route, and what will the server's terminal show?</p>
+    <details><summary>What you should see</summary><div class="answer"><p>Terminal 1 prints "Running on http://127.0.0.1:8000" and then one line per request, such as <code>"POST /chat HTTP/1.1" 200</code>. Read it as the method and the address, then the status number; 200 means the request went well. The WARNING line about a development server is printed on every start, and nothing is wrong when it appears. It says that Flask's own server is for one developer on one laptop; Vercel starts the application its own way. Terminal 2 prints the four turns with replies and tokens numbers; the memory test passes because the client resends the list. Stop the server with Ctrl+C, which the server itself names.</p></div></details>
+  </div>
+  <div class="part investigate"><h3>Investigate</h3><ol><li>Where is the list between request 2 and request 3?</li><li>What does the server keep between two requests?</li><li>If all of you used one server at the same time, would your conversations mix?</li></ol></div>
+  <div class="part"><h3>The tests</h3><ul class="tests"><li><label><input type="checkbox" id="t7m"> Memory through the route</label></li><li><label><input type="checkbox" id="t7b"> Behaviour: the France question is refused</label></li></ul></div>
+</section>
+
+<section class="stage" id="s8">
+  <p class="eyebrow">Stage 8 · Web interface · 02_web/stage8/app.py and index.html</p>
+  <h2>The page holds the history and the server holds nothing</h2>
+  <div class="part"><h3>The learning moment</h3><p class="moment">The page and the test client are the same program in two languages: an empty list, a post of the whole list, and two appends. Whatever the page stores or sends, any visitor can read.</p></div>
+  <div class="part"><h3>The mental model</h3>
+    <div class="model"><span class="chip new">index.html: const history = []</span><span class="arrow">sends all of it to</span><span class="chip">POST /chat, unchanged</span><span class="arrow">and</span><span class="chip new">GET / sends the page</span><p class="who">Refreshing the page runs its code again, so the array is created empty again.</p></div>
+  </div>
+  <div class="part"><h3>The lines to think about</h3>
+<pre><code>const history = [];   <span class="new">// the list; created empty every time the page loads</span>
+history.push({ role: "user", content: text });
+const answer = await fetch("/chat", {   // the whole list goes to the server
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ history }),
+}).then((response) =&gt; response.json());
+history.push({ role: "assistant", content: answer.reply });</code></pre></div>
+  <div class="part"><h3>Predict, then run</h3>
+    <p class="predict-q">Open http://localhost:8000, type the three memory turns, then refresh the page and type turn 2 again. What does the chatbot remember?</p>
+    <details><summary>What you should see</summary><div class="answer"><p>Before the refresh, the memory test passes. After the refresh, the model cannot name Sunday: the array was created empty when the page loaded. Open the browser's developer tools (F12, or right-click and Inspect) and choose the Network tab. Send one turn, click the request named chat, and read its body: it is the whole list. In the server's terminal, the first visit also shows <code>"GET /favicon.ico HTTP/1.1" 404</code>: the browser asked for a tab icon, there is none, and 404 means not found. The page works without it.</p></div></details>
+  </div>
+  <div class="part investigate"><h3>Investigate</h3><ol><li>How many entries did the last request carry?</li><li>Where would you look to see everything a page sends to a server?</li><li>What changed in app.py in this stage, and what did not?</li></ol></div>
+  <div class="part"><h3>The tests</h3><ul class="tests"><li><label><input type="checkbox" id="t8m"> Memory in the browser, then cleared by a refresh</label></li></ul></div>
+</section>
+
+<section class="stage" id="s9">
+  <p class="eyebrow">Stage 9 · Deploy · app.py, index.html and test_chat.py at the root</p>
+  <h2>Deploy to Vercel with the key in the environment and the link protected</h2>
+  <div class="part"><h3>The learning moment</h3><p class="moment">Deploying changes no line of the code, but it changes who can open the chatbot. The key is entered in the host's settings, and a passphrase check is added to the route, because anyone who finds the link can open it.</p></div>
+  <div class="part"><h3>The mental model</h3>
+    <div class="model"><span class="chip">your GitHub repository</span><span class="arrow">is built by</span><span class="chip">Vercel</span><span class="arrow">which runs app.py with</span><span class="chip sys">four values from its settings</span><span class="arrow">for</span><span class="chip">any visitor with the passphrase</span><p class="who">The key is in Vercel's settings and in your root .env. The code, the page and the repository do not contain it.</p></div>
+  </div>
+  <div class="part"><h3>The lines to think about</h3>
+<pre><code>    data = request.get_json()
+    <span class="new"># 4b. The passphrase check. The passphrase is the fourth environment value.</span>
+    <span class="new">#     A missing value gets its own message, so that it is not read as a</span>
+    <span class="new">#     wrong passphrase.</span>
+    if not os.getenv("APP_PASSWORD"):
+        reply = (
+            "APP_PASSWORD is not set on this server. "
+            + "Add it in .env on your laptop, "
+            + "or in Environment Variables on Vercel."
+        )
+        return {"reply": reply, "tokens": "unknown"}, 401
+    if data.get("passphrase") != os.getenv("APP_PASSWORD"):
+        return {"reply": "The passphrase is wrong.", "tokens": "unknown"}, 401
+    history = data["history"]</code></pre></div>
+  <div class="part"><h3>Predict, then run</h3>
+    <p class="predict-q">Once the app is on Vercel, where is the key? What would happen if it were written in index.html?</p>
+    <details><summary>What you should see</summary><div class="answer"><p>The key is in Vercel's environment settings. A key written in the page would be readable by any visitor through the browser's developer tools, so it would be a key given to everyone. The steps are in <code>03_deploy/README.md</code>. Run locally once and check that <code>git status</code> does not list <code>.env</code>. Push, import the repository in Vercel, type the four values into Environment Variables, deploy, and open the link. Post the project's own link, in the form https://&lt;project-name&gt;.vercel.app; the longer link with random letters is one deployment only. If <code>APP_PASSWORD</code> is missing on Vercel, the first reply says so. If the page itself says "This page is unavailable" with FUNCTION_INVOCATION_FAILED, one of the three LLM values is missing; the fix table in <code>03_deploy/README.md</code> covers each case.</p></div></details>
+  </div>
+  <div class="part investigate"><h3>Investigate</h3><ol><li>Who can use your chatbot now, and who pays for the tokens?</li><li>What does the passphrase prevent, and what does it not?</li><li>Why is the first request after a pause slower?</li></ol></div>
+  <div class="part"><h3>The tests</h3><ul class="tests"><li><label><input type="checkbox" id="t9m"> Memory on the live link</label></li><li><label><input type="checkbox" id="t9k"> The repository contains no key</label></li></ul></div>
+</section>
+
+<section class="stage" id="s10">
+  <p class="eyebrow">Stage 10 · Customise · 04_customise/MODIFY.md</p>
+  <h2>Make it yours: change the persona, the model and the page, then redeploy</h2>
+  <div class="part"><h3>The learning moment</h3><p class="moment">A chat application is three changeable things, the system entry, the page and the provider values, around a loop that never changes. Knowing which is which is what makes the code reusable.</p></div>
+  <div class="part"><h3>The mental model</h3>
+    <div class="table-wrap"><table><thead><tr><th>File</th><th>Lines to change</th><th>Lines to keep</th></tr></thead><tbody>
+      <tr><td>app.py</td><td>the system entry; the KEEP number</td><td>the client lines, the chat route, the trim line, the passphrase check</td></tr>
+      <tr><td>index.html</td><td>the title, the greeting, the style</td><td>the array, the post, the two appends, the passphrase prompt</td></tr>
+      <tr><td>.env and Vercel's settings</td><td>the provider's three values; the passphrase</td><td>the names of the four values</td></tr>
+      <tr><td>test_chat.py</td><td>the turns</td><td>the loop, the post, the appends</td></tr>
+    </tbody></table></div>
+  </div>
+  <div class="part"><h3>The work</h3><ol class="investigate"><li>In app.py, rewrite the system entry for a purpose of your own: who the assistant is, the facts it may use, and two rules.</li><li>In index.html, change the title and the greeting.</li><li>In test_chat.py, write your own three memory turns: a fact in turn 1, and a question in turn 3 that needs that fact.</li><li>Run locally once, then commit and push.</li><li>In Vercel, open Settings, then Environment Variables, and change the three LLM values to your OpenRouter block with a model name ending in :free. Press Save, then Redeploy from the Deployments page.</li><li>Post your link and a note of three sentences: what you changed, what you kept, and why the kept lines must not change.</li></ol></div>
+  <div class="part"><h3>Predict, then run</h3>
+    <p class="predict-q">To change the model on your deployed chatbot, which file do you edit?</p>
+    <details><summary>What you should see</summary><div class="answer"><p>You edit neither app.py nor index.html. The provider is three values in Vercel's settings, and the deployed app changes after Redeploy without a push. That is stage 6's lesson applied to a deployed app.</p></div></details>
+  </div>
+  <div class="part"><h3>The tests</h3><ul class="tests"><li><label><input type="checkbox" id="t10m"> Memory with your own three turns</label></li><li><label><input type="checkbox" id="t10r"> The variant is modified and redeployed</label></li></ul></div>
+</section>
+
+</main>
+</div>
+<script>
+  // Keep the test ticks in this browser only. Everything on the page works without storage.
+  (function () {
+    var boxes = document.querySelectorAll('.tests input[type="checkbox"]');
+    for (var i = 0; i < boxes.length; i++) {
+      var box = boxes[i];
+      try { box.checked = localStorage.getItem('tick:' + box.id) === '1'; } catch (e) {}
+      box.addEventListener('change', function (event) {
+        try { localStorage.setItem('tick:' + event.target.id, event.target.checked ? '1' : '0'); } catch (e) {}
+      });
+    }
+  })();
+</script>
+</body>
+</html>
