@@ -18,8 +18,8 @@ slides and transcript are kept in a separate private repository.
 - Use what you learn here in any work, paid or unpaid; what you learn is yours.
 - Deploy your own copy to Vercel and show the link as a portfolio piece; the deployed
   chatbot and your repository are yours.
-- Build an application of your own on top of the stage 9 code and sell it if you wish;
-  the code is a starting point, and the restriction below is on the course, not the code.
+- Build an application of your own on top of the stage 9 code and sell it if you wish.
+  The code is a starting point; the restriction below applies to the course materials.
 - Run a free workshop with these materials, with attribution.
 - Share this repository's link freely.
 
