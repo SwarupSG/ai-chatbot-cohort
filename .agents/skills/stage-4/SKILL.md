@@ -22,4 +22,4 @@ Turn 2 names Sunday. The tokens number grows every turn (about 104, then 120 to 
 
 - 'I can only help with questions about the café.' as the reply to 'what was my last question?' is rule 2 refusing a question that is not about the café. It does not mean memory failed. Test memory with the three fixed turns, which ask about the café in a way only turn 1 can answer.
 - 'tokens sent: unknown' means the provider did not return a usage count; the memory test still runs.
-- If the number stays flat while the list grows, the call is not sending the list: see the Investigate questions for stage 4 in stage-guide.html.
+- If the number stays flat while the list grows, the call is not sending the list: see the Investigate questions for stage 4 on the stage guide page.

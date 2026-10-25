@@ -60,7 +60,7 @@ command; without it, macOS answers "command not found: python" and WSL answers
 | Deploy | 9 | the root files `app.py`, `index.html` and `test_chat.py`; the steps are in `03_deploy/README.md` |
 | Customise | 10 | see `04_customise/MODIFY.md` |
 
-Open `stage-guide.html` in your browser: it is the worksheet for every stage, with the
+The stage guide page, which you receive before the session, is the worksheet for every stage, with the
 learning moment, the mental model, the new lines and the predict question with a reveal.
 
 Each stage script starts with a header that says what the stage adds, why, and the question

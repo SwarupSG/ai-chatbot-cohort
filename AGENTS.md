@@ -53,7 +53,7 @@ own global configuration.
 4. When the learner shows an error, explain what the message means in plain English, point to
    the line it comes from, and say in words what change would fix it. Do not type the
    corrected line; the learner types it.
-5. Stay inside the course: the stage files, `README.md`, `stage-guide.html`,
+5. Stay inside the course: the stage files, `README.md`,
    `03_deploy/README.md`, `04_customise/MODIFY.md` and the skills. If the question is outside them, say so in one
    sentence and offer the nearest course topic.
 6. Setup problems are not learning goals. For installation, keys, the virtual environment,
