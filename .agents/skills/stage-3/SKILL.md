@@ -12,7 +12,7 @@ A loop that takes a typed question each turn and builds the list again every tur
 
 ## The predict question
 
-Type the first two memory test turns. What will the model say to turn 2, 'Will you be open on the day I mentioned?'
+The script prints the two memory test turns before the gate; type them in order. What will the model say to turn 2, 'Will you be open on the day I mentioned?'
 
 ## What the learner should see
 

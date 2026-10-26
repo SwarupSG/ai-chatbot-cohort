@@ -1,7 +1,8 @@
 """Stage 3: a loop without memory forgets the previous turn.
 
 What this stage adds: a loop that takes a typed question each turn. The three
-fixed questions are gone; you type the questions yourself.
+fixed questions are gone; you type the questions yourself. The script prints the
+two memory test turns first, so that you type exactly those.
 What it does not add: memory. The list is built again on every turn.
 """
 import os
@@ -28,7 +29,11 @@ system_entry = {
     ),
 }
 
-input("Predict first: type the first two memory test turns. What will the model say to turn 2? Write it down, then press Enter. ")
+# NEW in stage 3
+# 2b. The memory test: type these two turns in this order, then type quit.
+print("Memory test, turn 1: I plan to visit on Sunday with two friends. Do you serve tea?")
+print("Memory test, turn 2: Will you be open on the day I mentioned?")
+input("Predict first: what will the model say to turn 2? Write it down, then press Enter only.\n")
 
 # NEW in stage 3
 # 3. One turn per loop: take a typed question; the word quit ends the loop.

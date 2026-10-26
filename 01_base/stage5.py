@@ -35,7 +35,11 @@ system_entry = {
 history = [system_entry]
 KEEP = 2
 
-input("Predict first: KEEP is one turn. Which memory test turn fails first? Write it down, then press Enter. ")
+# 2b. The memory test: type these three turns in this order, then type quit.
+print("Memory test, turn 1: I plan to visit on Sunday with two friends. Do you serve tea?")
+print("Memory test, turn 2: Will you be open on the day I mentioned?")
+print("Memory test, turn 3: How many cups of tea will we need for all of us on that day?")
+input("Predict first: KEEP is one turn. Which memory test turn fails first? Write it down, then press Enter only.\n")
 
 while True:
     question = input("You: ")

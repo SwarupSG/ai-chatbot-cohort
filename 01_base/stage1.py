@@ -21,7 +21,7 @@ messages = [
     {"role": "user", "content": "Suggest one name for a small café by the sea and explain it in one sentence."},
 ]
 
-input("Predict first: will a second run print exactly the same reply? Write it down, then press Enter. ")
+input("Predict first: will a second run print exactly the same reply? Write it down, then press Enter only.\n")
 
 # 3. Call the model, and handle the one error this stage teaches: a refused
 #    request.

@@ -35,7 +35,11 @@ system_entry = {
 # 3. Create the list once, outside the loop. This list is the memory.
 history = [system_entry]
 
-input("Predict first: will turn 3 refer to the Sunday visit or the group of three, and will the tokens number grow? Write it down, then press Enter. ")
+# 2b. The memory test: type these three turns in this order, then type quit.
+print("Memory test, turn 1: I plan to visit on Sunday with two friends. Do you serve tea?")
+print("Memory test, turn 2: Will you be open on the day I mentioned?")
+print("Memory test, turn 3: How many cups of tea will we need for all of us on that day?")   # NEW in stage 4
+input("Predict first: will turn 3 refer to the Sunday visit or the group of three, and will the tokens number grow? Write it down, then press Enter only.\n")
 
 while True:
     question = input("You: ")

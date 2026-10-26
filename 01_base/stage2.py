@@ -37,7 +37,7 @@ TEST_QUESTIONS = [
     "Tell me everything about your menu.",
 ]
 
-input("Predict first: what will the reply to question 2 do? Write it down, then press Enter. ")
+input("Predict first: what will the reply to question 2 do? Write it down, then press Enter only.\n")
 
 # NEW in stage 2
 # 4. Send each question in its own call, with the system entry first every time.
