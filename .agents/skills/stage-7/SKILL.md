@@ -8,7 +8,7 @@ metadata:
 
 ## What this stage adds
 
-The loop, the typed input and the appends are removed. A Flask route (one address the server answers), POST /chat, receives the whole history as JSON (text in a fixed format that browsers and servers both read). It adds the system entry, trims, calls the model and returns one reply with the tokens number. The server keeps nothing. test_chat.py is the caller that keeps the list and sends the four fixed turns.
+Since stage 1 your program has been the caller of an API. From stage 7 your program is the one that is called. The loop, the typed input and the appends are removed. A Flask route (one address the server answers), POST /chat, receives the whole history as JSON (text in a fixed format that browsers and servers both read). It adds the system entry, trims, calls the model and returns one reply with the tokens number. The server keeps nothing. test_chat.py is the caller that keeps the list and sends the four fixed turns.
 
 ## The predict question
 
