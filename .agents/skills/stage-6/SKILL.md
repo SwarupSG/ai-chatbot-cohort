@@ -8,7 +8,7 @@ metadata:
 
 ## What this stage adds
 
-No code change. The three provider values in .env are switched from the Gemini block to the OpenRouter block, and 01_base/stage5.py runs unchanged.
+No code change. The three provider values in .env are switched from the Gemini block to the OpenRouter block, and 01_base/stage5.py runs unchanged. The steps are in 01_base/stage6.md.
 
 ## The predict question
 

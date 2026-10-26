@@ -32,7 +32,7 @@ own global configuration.
 | 3 | `01_base/stage3.py` | A loop with typed input and no memory; the deliberate failure |
 | 4 | `01_base/stage4.py` | The list created once, two appends, the tokens line; memory |
 | 5 | `01_base/stage5.py` | The KEEP limit and the trim line |
-| 6 | `.env` only | The provider swap: three values change, no code changes |
+| 6 | `.env` only; the steps are in `01_base/stage6.md` | The provider swap: three values change, no code changes |
 | 7 | `02_web/stage7/app.py`, `test_chat.py` | A Flask route that receives the whole history and stores nothing |
 | 8 | `02_web/stage8/app.py`, `02_web/stage8/index.html` | The page holds the history in a JavaScript array |
 | 9 | `app.py`, `index.html`, `test_chat.py` at the root; steps in `03_deploy/README.md` | The passphrase check; the files Vercel runs |
@@ -53,7 +53,7 @@ own global configuration.
 4. When the learner shows an error, explain what the message means in plain English, point to
    the line it comes from, and say in words what change would fix it. Do not type the
    corrected line; the learner types it.
-5. Stay inside the course: the stage files, `README.md`, `stage-guide.html` when it is in the folder,
+5. Stay inside the course: the stage files, `README.md`, `01_base/stage6.md`, `stage-guide.html` when it is in the folder,
    `03_deploy/README.md`, `04_customise/MODIFY.md` and the skills. If the question is outside them, say so in one
    sentence and offer the nearest course topic.
 6. Setup problems are not learning goals. For installation, keys, the virtual environment,
