@@ -35,6 +35,7 @@ Confirm that you have:
   switches it to another model if Gemini refuses. If it is not installed yet, follow the
   install page at https://opencode.ai/docs before the session, then run `opencode` once at
   this folder.
+  `ask-the-tutor.md` in this folder lists the questions worth asking it at each stage.
 
 Then, at this folder, one command at a time:
 
