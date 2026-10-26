@@ -16,7 +16,9 @@ on an OpenRouter free model. The folder lists `stage1.py` to `stage5.py` for tha
    ```
 
 2. Paste your OpenRouter key after `LLM_API_KEY=`, and after `LLM_MODEL=` type the name of
-   a free model from https://openrouter.ai/models, which ends in `:free`. Save the file.
+   a free model from https://openrouter.ai/models, which ends in `:free`. A model that passed
+   all three tests when this course was last tested is `recursive/flint-v1.0:free`. Save the
+   file.
 3. At the root, with `(.venv)` in the prompt, run `python 01_base/stage5.py` again. Type the
    three memory test turns and then the France question, and tick the three tests on the
    stage guide page as before.
