@@ -8,7 +8,7 @@ metadata:
 
 ## What this stage adds
 
-One route GET / sends the page. The page keeps the list in a JavaScript array named history, sends all of it to /chat on every turn, and appends the reply. Nothing else changes; test_chat.py still passes.
+One route GET / sends the page. The page keeps the list in a JavaScript array named history, sends all of it to /chat on every turn, and appends the reply. Nothing else changes; test_chat.py still passes. Five optional modifications to app.py, each with a prediction and a test, are in 02_web/stage8/modifications.md; explain their lines, do not write them.
 
 ## The predict question
 

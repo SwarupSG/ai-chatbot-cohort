@@ -80,6 +80,7 @@ that comes up.
 2. What does the fetch call in index.html send to the server?
 3. Why does refreshing the page make the chatbot forget everything?
 4. What is the line "GET /favicon.ico" 404 in the server's terminal?
+5. In modifications.md, which of the five changes the call to the model, and which change the route around it?
 
 ## Stage 9: the passphrase and Vercel
 

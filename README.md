@@ -60,7 +60,7 @@ command; without it, macOS answers "command not found: python" and WSL answers
 | Block | Stages | Run |
 |---|---|---|
 | Base | 1 to 6 | `python 01_base/stage1.py` … `python 01_base/stage5.py`; stage 6 changes `.env` only; the steps are in `01_base/stage6.md` |
-| Web interface | 7 to 8 | `python 02_web/stage7/app.py` then `python test_chat.py`; `python 02_web/stage8/app.py` then open http://localhost:8000 |
+| Web interface | 7 to 8 | `python 02_web/stage7/app.py` then `python test_chat.py`; `python 02_web/stage8/app.py` then open http://localhost:8000; five modifications in `02_web/stage8/modifications.md` |
 | Deploy | 9 | the root files `app.py`, `index.html` and `test_chat.py`; the steps are in `03_deploy/README.md` |
 | Customise | 10 | see `04_customise/MODIFY.md` |
 
