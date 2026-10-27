@@ -10,6 +10,11 @@ metadata:
 
 Since stage 1 your program has been the caller of an API. From stage 7 your program is the one that is called. The loop, the typed input and the appends are removed. A Flask route (one address the server answers), POST /chat, receives the whole history as JSON (text in a fixed format that browsers and servers both read). It adds the system entry, trims, calls the model and returns one reply with the tokens number. The server keeps nothing. test_chat.py is the caller that keeps the list and sends the four fixed turns.
 
+## Two lines a learner often asks about
+
+- `@app.post("/chat")` is the line above the function; it tells Flask to run the function below it when a POST request arrives at the address /chat. Without it the function is never called.
+- `request.get_json()["history"]` reads the body of the request as JSON and takes the value under the key history, which is the caller's list.
+
 ## The predict question
 
 The test client sends the memory turns through the route. Will the memory test pass? What will the server's terminal show?

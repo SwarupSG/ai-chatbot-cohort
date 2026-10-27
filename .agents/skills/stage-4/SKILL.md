@@ -10,6 +10,11 @@ metadata:
 
 The list is created once before the loop; each typed turn and each reply is appended; the whole list is sent every call; the number of tokens sent is printed.
 
+## Two lines a learner often asks about
+
+- `history = [system_entry]` sits above the loop, so the list is created once and keeps growing. The same line inside the loop would create it again on every turn, which is stage 3.
+- `history.append({"role": "assistant", "content": reply})` puts the model's own reply into the list, so on the next turn the model receives what it said as well as what the learner typed.
+
 ## The predict question
 
 Will the reply to turn 3 refer to the Sunday visit or the group of three? Will the tokens number on turn 3 be bigger than on turn 1?

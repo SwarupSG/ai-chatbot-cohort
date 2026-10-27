@@ -10,6 +10,11 @@ metadata:
 
 A system entry at the top of the list (who the assistant is, the café facts, two rules) and three fixed questions sent in their own calls.
 
+## Two lines a learner often asks about
+
+- The system entry's `"content"` is several quoted pieces inside parentheses. Python joins them into one string; they are split across lines only so that the code is easier to read.
+- `messages = [system_entry, {"role": "user", "content": question}]` builds a new two-entry list for each question, so the system entry is first in every call and no question sees another.
+
 ## The predict question
 
 What will the reply to question 2, 'What is the capital of France?', do?

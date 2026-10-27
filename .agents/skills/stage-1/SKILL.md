@@ -10,6 +10,11 @@ metadata:
 
 One call to the model with a list holding one user entry; the reply is printed.
 
+## Two lines a learner often asks about
+
+- The client is created once, under label 1, from two values read from .env; the call under label 3 uses it. Creating the client sends nothing; the call does.
+- `{"role": "user", "content": "..."}` is one entry: `"role"` says who is speaking, and `"content"` is the text. The list holds one such entry, and the model receives only what is in the list.
+
 ## The predict question
 
 Run the script twice. Will the second reply be exactly the same as the first?

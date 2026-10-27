@@ -10,6 +10,11 @@ metadata:
 
 A constant KEEP sets how many recent entries are kept; two entries make one turn. One trim line keeps the system entry plus the last KEEP entries before each call. The file sets KEEP = 2.
 
+## Two lines a learner often asks about
+
+- `history[-KEEP:]` is the last KEEP entries of the list, counted from the end; with KEEP at 2 it is the last question and its reply.
+- `[history[0]] + history[-KEEP:]` joins two lists: the first entry, which is the system entry, and the last KEEP entries, so the system entry is never dropped.
+
 ## The predict question
 
 KEEP is 2, which is one turn. Which memory test turn fails first?

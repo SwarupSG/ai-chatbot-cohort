@@ -10,6 +10,11 @@ metadata:
 
 One route GET / sends the page. The page keeps the list in a JavaScript array named history, sends all of it to /chat on every turn, and appends the reply. Nothing else changes; test_chat.py still passes. Five optional modifications to app.py, each with a prediction and a test, are in 02_web/stage8/modifications.md; explain their lines, do not write them.
 
+## Two lines a learner often asks about
+
+- `await fetch("/chat", {...})` in index.html sends the request from the page and waits for the response. `body: JSON.stringify({ history })` turns the array into the JSON text the route reads with `request.get_json()`.
+- `Path(__file__).with_name("index.html").read_text()` under label 3a reads the page file that sits next to app.py and returns its text, which is why the page has no address of its own.
+
 ## The predict question
 
 After you refresh the page, what does the chatbot remember?
