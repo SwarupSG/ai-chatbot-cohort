@@ -22,4 +22,6 @@ Nothing in the code changes. With the OpenRouter lines active and a model name e
 
 - 'The provider refused the request' with 429 on the free model means the per-minute or per-day free limit; wait a minute or pick another :free model.
 - If the model name is wrong, the provider's message says the model was not found; copy the name exactly from the model list.
+- 'no upstreams available' with 503 means the company serving that free model has no capacity at the moment; choose another :free model and run again.
+- An empty reply from a free model means it spent its words on hidden reasoning before answering; choose another :free model.
 - Do not type personal or client information into a free model.

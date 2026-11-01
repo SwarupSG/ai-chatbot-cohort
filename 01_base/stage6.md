@@ -16,9 +16,11 @@ on an OpenRouter free model. The folder lists `stage1.py` to `stage5.py` for tha
    ```
 
 2. Paste your OpenRouter key after `LLM_API_KEY=`, and after `LLM_MODEL=` type the name of
-   a free model from https://openrouter.ai/models, which ends in `:free`. A model that passed
-   all three tests when this course was last tested is `recursive/flint-v1.0:free`. Save the
-   file.
+   a free model from https://openrouter.ai/models, which ends in `:free`. Three models that
+   passed the tests when this course was last checked are `nvidia/nemotron-3.5-lightning:free`,
+   `nvidia/nemotron-3.5-super-vl:free` and `liquid/lfm-2.5-2.6b:free`. Any of them may be
+   gone by the time you read this; the test of a model is whether the refusal sentence comes
+   back for the France question. Save the file.
 3. At the root, with `(.venv)` in the prompt, run `python 01_base/stage5.py` again. Type the
    three memory test turns and then the France question, and tick the three tests on the
    stage guide page as before.
@@ -42,5 +44,7 @@ on your prompts. Do not type personal or client information into a free model.
 |---|---|---|
 | "The provider refused the request" with 429 or "rate limit" | The per-minute or per-day free limit | Wait one minute, or choose another `:free` model |
 | A message that the model was not found | The name after `LLM_MODEL=` is not exact | Copy the name again from the model list, including `:free` |
+| "no upstreams available" with 503 | The company serving that free model has no capacity at the moment | Choose another `:free` model and run again |
+| An empty reply, or a reply that starts with the model's own notes | That free model spends its words on hidden reasoning before it answers | Choose another `:free` model |
 | "The provider refused the request" with 401 or "API key" | The OpenRouter key is wrong, or the Gemini lines are still active | Check the three lines without a `#` in `.env` |
 | Four active lines, or two | A `#` is missing or one too many | Exactly three lines carry no `#`, all from one block |
