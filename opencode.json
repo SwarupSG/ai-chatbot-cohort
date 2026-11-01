@@ -13,6 +13,7 @@
   },
   "permission": {
     "edit": "deny",
+    "bash": "deny",
     "shell": "deny",
     "webfetch": "deny",
     "websearch": "deny"

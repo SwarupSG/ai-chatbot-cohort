@@ -4,6 +4,7 @@ mode: primary
 temperature: 0.2
 permission:
   edit: deny
+  bash: deny
   shell: deny
   webfetch: deny
   websearch: deny
