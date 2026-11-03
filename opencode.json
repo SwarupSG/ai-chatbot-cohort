@@ -2,20 +2,18 @@
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "tutor",
   "model": "google/gemini-3.5-flash-lite",
-  "share": "disabled",
-  "agent": {
-    "build": {
-      "disable": true
-    },
-    "plan": {
-      "disable": true
-    }
+  "agents": {
+    "build": { "disabled": true },
+    "plan": { "disabled": true }
   },
-  "permission": {
-    "edit": "deny",
-    "bash": "deny",
-    "shell": "deny",
-    "webfetch": "deny",
-    "websearch": "deny"
-  }
+  "permissions": [
+    { "action": "edit", "resource": "*", "effect": "deny" },
+    { "action": "shell", "resource": "*", "effect": "deny" },
+    { "action": "webfetch", "resource": "*", "effect": "deny" },
+    { "action": "websearch", "resource": "*", "effect": "deny" },
+    { "action": "external_directory", "resource": "*", "effect": "deny" },
+    { "action": "read", "resource": "*.env", "effect": "deny" },
+    { "action": "read", "resource": "*.env.*", "effect": "deny" },
+    { "action": "read", "resource": "*.env.example", "effect": "allow" }
+  ]
 }

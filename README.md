@@ -30,15 +30,15 @@ Confirm that you have:
 - The stage guide page, `stage-guide.html`, which you receive before the session, saved in
   this folder next to `check.py`. It is the worksheet for every stage, and `.gitignore`
   keeps it out of your pushes.
-- OpenCode 1 installed in the same terminal (WSL for Windows), with the Google provider
+- OpenCode 2 installed in the same terminal (WSL for Windows), with the Google provider
   connected to your Gemini key; the tutor runs on Gemini, and `/models` inside OpenCode
-  switches it to another model if Gemini refuses. The course uses OpenCode 1, so
-  `opencode --version` must print a number that starts with 1, such as 1.19.5. If it is
-  not installed yet, install it with this one command, then run `opencode` once at this
-  folder:
-  `curl -fsSL https://opencode.ai/install | bash`
-  Do not install it with Homebrew or from the OpenCode 2 page; those give OpenCode 2,
-  whose commands differ from the ones in this course.
+  switches it to another model if Gemini refuses. `opencode --version` must print a
+  number that starts with 2, such as `opencode v2.2.5`. If it is not installed yet, or
+  the number starts with 1, install it with this one command, then run `opencode` once
+  at this folder:
+  `curl -fsSL https://opencode.ai/v2/install | bash -s -- --version 2.2.5`
+  The command replaces an older OpenCode. Use the command and not the Download buttons
+  on opencode.ai, which install a desktop app that the course does not use.
   `ask-the-tutor.md` in this folder lists the questions worth asking it at each stage.
 
 Then, at this folder, one command at a time:
