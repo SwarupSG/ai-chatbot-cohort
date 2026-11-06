@@ -26,8 +26,11 @@ Four things a learner pastes are results and not faults, and say so: "I can only
 questions about the café." as the reply to a question that is not about the café is rule 2
 working, including the reply to "what was my last question?"; "WARNING: This is a
 development server" is printed on every start of stage 7 onwards and nothing is wrong;
-`"GET /favicon.ico HTTP/1.1" 404` in the server log is the browser asking for a tab icon
-that does not exist; and "Method Not Allowed" is the address `/chat` typed into the
+`"GET /health HTTP/1.1" 404` repeated every thirty seconds is a tool on the laptop asking
+whether a server is alive, not the learner and not a fault; `"GET /favicon.ico HTTP/1.1" 404` in the server log is the browser asking for a tab icon
+that does not exist; `"GET / HTTP/1.1" 404` in stage 7 is the browser opening the printed
+address, which has no page until stage 8 adds GET /, so the learner runs test_chat.py in a
+second terminal instead; and "Method Not Allowed" is the address `/chat` typed into the
 browser, which sends a GET to a route that answers POST. Two messages come from Python
 rather than the script: "can't open file" means the command was typed in the wrong
 folder, so the learner goes to the repository root, the folder that holds check.py; and

@@ -32,6 +32,8 @@ Terminal 1 (python 02_web/stage7/app.py) prints 'Running on http://127.0.0.1:800
 ## Common messages and what they mean
 
 - 'WARNING: This is a development server' is printed on every start, and nothing is wrong when it appears. It says that Flask's own server is for one developer on one laptop; Vercel starts the application its own way.
+- `"GET / HTTP/1.1" 404` in the server's terminal means the learner opened the printed address in a browser. Stage 7 has one route, POST /chat, and no page; every browser address gets 404 until stage 8 adds GET /. The caller in stage 7 is test_chat.py in a second terminal, so nothing is wrong and nothing needs fixing.
+- 'Restarting with stat' and 'Debugger PIN' are Flask's debug mode, switched on by debug=True in app.run: the server restarts when the file is saved. Nothing is wrong.
 - 'Address already in use' means a server from earlier is still running; stop it with Ctrl+C in its terminal.
 - 'Connection refused' from the test client means the server is not running or the address is not port 8000.
 - 'No module named flask' or 'requests' means the virtual environment is not on in that terminal; run source .venv/bin/activate there, then the command again.

@@ -27,5 +27,6 @@ Open http://localhost:8000, type the three memory turns, and the memory test pas
 
 - 'Method Not Allowed' means the address /chat was typed into the browser; go back to the page address.
 - '"GET /favicon.ico HTTP/1.1" 404' in the server log means the browser asked for a tab icon and there is none. 404 is the status number for not found; the page works without an icon.
+- A log line the learner did not cause, such as '"GET /health HTTP/1.1" 404' every thirty seconds, comes from a tool on the laptop (an editor or a browser tool that watches local servers) asking whether a server is alive. It is not a fault, and its absence means nothing on that laptop is polling. It is the learning moment of the log: the server answers every caller and cannot tell the page from any other caller, which is why stage 9 adds the passphrase and modification 3 checks the length before paying for a call.
 - If the page looks unchanged after an edit, refresh it.
 - The page does not load: the server is not running, or the address is not localhost:8000.
