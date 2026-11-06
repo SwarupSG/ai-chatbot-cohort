@@ -72,8 +72,8 @@ work to GitHub, and Vercel builds from your account. Thus the repository must be
 
 ### Step 6: the stage guide
 
-1. You receive the file `stage-guide.html` before the session. Save it in this folder, next
-   to `check.py`.
+1. You receive the file `stage-guide.html` before the session. Save it in the folder
+   `ai-chatbot`, next to `check.py`.
 2. This page is the worksheet for each stage. `.gitignore` keeps the page out of your
    pushes.
 
