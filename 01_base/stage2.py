@@ -37,6 +37,7 @@ TEST_QUESTIONS = [
     "Tell me everything about your menu.",
 ]
 
+print("Goal: see the system entry at work. Question 1 should be answered from the facts, question 2 refused, and question 3 answered in at most two sentences.")   # NEW in stage 2
 input("Predict first: what will the reply to question 2 do? Write it down, then press Enter only.\n")
 
 # NEW in stage 2
@@ -58,3 +59,5 @@ for question in TEST_QUESTIONS:
     print("You:", question)
     print("Bot:", reply)
 
+# 6. The three checks of the behaviour test.   # NEW in stage 2
+print("Check: was question 1 answered from the facts, question 2 refused with the exact sentence, and question 3 answered in at most two sentences?")

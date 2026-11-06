@@ -36,10 +36,12 @@ system_entry = {
 history = [system_entry]
 
 # 2b. The memory test: type these three turns in this order, then type quit.
+print("Goal: see the memory work. The list is kept and sent whole. Type the three turns below in this order; turn 2 should name Sunday, and turn 3 should refer to the visit or the group.")   # NEW in stage 4
 print("Memory test, turn 1: I plan to visit on Sunday with two friends. Do you serve tea?")
 print("Memory test, turn 2: Will you be open on the day I mentioned?")
-print("Memory test, turn 3: How many cups of tea will we need for all of us on that day?")   # NEW in stage 4
+print("Memory test, turn 3: Will you have enough tea and cakes for all of us on that day?")   # NEW in stage 4
 input("Predict first: will turn 3 refer to the Sunday visit or the group of three, and will the tokens number grow? Write it down, then press Enter only.\n")
+turn = 0   # counts the turns, so that the script can speak after the last test turn
 
 while True:
     question = input("You: ")
@@ -68,4 +70,7 @@ while True:
     tokens = response.usage.prompt_tokens if response.usage else "unknown"
     print("Bot:", reply)
     print("tokens sent:", tokens)
+    turn = turn + 1
+    if turn == 3:   # NEW in stage 4
+        print("That was turn 3. Compare the three replies and the three tokens numbers with your prediction, then type quit.")
 

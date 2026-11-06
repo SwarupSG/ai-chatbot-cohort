@@ -31,9 +31,11 @@ system_entry = {
 
 # NEW in stage 3
 # 2b. The memory test: type these two turns in this order, then type quit.
+print("Goal: see that a list built again on every turn has no memory. Type the two turns below in this order; turn 2 should fail.")
 print("Memory test, turn 1: I plan to visit on Sunday with two friends. Do you serve tea?")
 print("Memory test, turn 2: Will you be open on the day I mentioned?")
 input("Predict first: what will the model say to turn 2? Write it down, then press Enter only.\n")
+turn = 0   # counts the turns, so that the script can speak after the last test turn
 
 # NEW in stage 3
 # 3. One turn per loop: take a typed question; the word quit ends the loop.
@@ -58,4 +60,7 @@ while True:
     # 5. Print the reply.
     reply = response.choices[0].message.content
     print("Bot:", reply)
+    turn = turn + 1
+    if turn == 2:
+        print("That was turn 2. If the reply did not name Sunday, that is the designed failure: turn 1 is in no list. Stage 4 fixes this. Type quit.")
 

@@ -21,7 +21,7 @@ Will the reply to turn 3 refer to the Sunday visit or the group of three? Will t
 
 ## What the learner should see
 
-Turn 2 names Sunday. The tokens number grows every turn (about 104, then 120 to 140, then 160 to 180 on the current model) because the whole list, replies included, is resent. Turn 3 refers to the Sunday visit or to the group of three, facts that are only in turn 1.
+The script prints a goal line first: the list is kept and sent whole, turn 2 should name Sunday, and turn 3 should refer to the visit or the group. After turn 3 it asks the learner to compare the replies and the tokens numbers with the prediction. Turn 2 names Sunday. The tokens number grows every turn (about 104, then 120 to 140, then 160 to 180 on the current model) because the whole list, replies included, is resent. Turn 3 refers to the Sunday visit or to the group of three, facts that are only in turn 1.
 
 ## Common messages and what they mean
 

@@ -13,7 +13,7 @@ PASSPHRASE = "choose-a-word"   # stage 9: the word you set as APP_PASSWORD
 TURNS = [
     "I plan to visit on Sunday with two friends. Do you serve tea?",
     "Will you be open on the day I mentioned?",
-    "How many cups of tea will we need for all of us on that day?",
+    "Will you have enough tea and cakes for all of us on that day?",
     "What is the capital of France?",
 ]
 
@@ -22,6 +22,7 @@ history = []
 
 # 4. For each turn: the turn joins the list, the whole list is sent, the reply
 #    joins the list.
+print("Goal: the three tests through the route. Turn 2 should name Sunday, turn 3 should refer to the visit or the group, and the France question should get the refusal sentence.")
 for turn in TURNS:
     history.append({"role": "user", "content": turn})
     answer = requests.post(ADDRESS, json={"history": history, "passphrase": PASSPHRASE}).json()
@@ -29,3 +30,5 @@ for turn in TURNS:
     print("You:", turn)
     print("Bot:", answer["reply"], "| tokens sent:", answer["tokens"])
 
+# 5. The checks.
+print("Check: did turn 2 name Sunday, did turn 3 refer to the visit or the group, was the France question refused with the exact sentence, and did every tokens number stay under 300?")

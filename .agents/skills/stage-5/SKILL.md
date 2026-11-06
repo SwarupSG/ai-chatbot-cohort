@@ -21,7 +21,7 @@ KEEP is 2, which is one turn. Which memory test turn fails first?
 
 ## What the learner should see
 
-At KEEP = 2, turn 2 fails because turn 1 was dropped before turn 2 was sent; sometimes Sunday is still in the list because the first reply repeated it. At KEEP = 6 all turns pass and the tokens number is highest (about 175 on turn 3). Budget test: the tokens number on the last turn stays under 300.
+The script prints a goal line first: the memory fails when the list is trimmed, KEEP = 2 keeps one turn, and turn 2 should fail. After turn 3 it tells the learner to set KEEP to 6 and run again. At KEEP = 2, turn 2 fails because turn 1 was dropped before turn 2 was sent; sometimes Sunday is still in the list because the first reply repeated it. At KEEP = 6 all turns pass and the tokens number is highest (about 175 on turn 3). Budget test: the tokens number on the last turn stays under 300.
 
 ## Common messages and what they mean
 

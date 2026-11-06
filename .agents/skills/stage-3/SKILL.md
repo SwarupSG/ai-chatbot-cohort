@@ -16,7 +16,7 @@ The script prints the two memory test turns before the gate; type them in order.
 
 ## What the learner should see
 
-Turn 2 is not answered for Sunday: the model asks which day, gives the opening times for every day, or gives the refusal sentence. All three are the same failure, because turn 1 is not in the list on turn 2. This is the designed failure.
+The script prints a goal line first: a list built again on every turn has no memory, and turn 2 should fail. After turn 2 it prints that a reply without Sunday is the designed failure and that stage 4 fixes it. Turn 2 is not answered for Sunday: the model asks which day, gives the opening times for every day, or gives the refusal sentence. All three are the same failure, because turn 1 is not in the list on turn 2. This is the designed failure.
 
 ## Common messages and what they mean
 
