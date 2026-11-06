@@ -13,11 +13,14 @@ steps below in order. The steps take approximately twenty minutes.
 
 ### Step 1: the terminal (Windows only)
 
-1. Make sure that WSL (Windows Subsystem for Linux) starts.
-2. Open a folder in VS Code. Make sure that the bottom-left corner of the window shows
-   "WSL: Ubuntu".
+1. Open the Ubuntu terminal: the app named **Ubuntu** in the Start menu, or the **Ubuntu**
+   tab in Windows Terminal. This terminal is WSL (Windows Subsystem for Linux). Do not use
+   PowerShell or Command Prompt for this course.
+2. Type `pwd`. The terminal must print `/home/` followed by your user name. If it prints
+   a path that starts with `/mnt/c/` or `C:\`, you are on the Windows side: close that
+   terminal and open the Ubuntu terminal.
 3. Do all the work of this course inside WSL. Do not use a path that starts with `/mnt/c/`.
-   That path is the Windows side.
+   That path is the Windows side, and `check.py` stops there.
 
 ### Step 2: Python and git
 
@@ -46,11 +49,16 @@ work to GitHub, and Vercel builds from your account. Thus the repository must be
 2. Click **Use this template**, then **Create a new repository**.
 3. Name the repository `ai-chatbot`. Keep it Private. Click **Create repository**.
 4. On the page of your new repository, click **Code**. Copy the address under **HTTPS**.
-5. In the terminal for the course (WSL on Windows), type `cd ~`. This is your home folder:
-   `/home/<you>/` in WSL, `/Users/<you>/` on macOS.
+5. In the terminal for the course (the Ubuntu terminal on Windows), type `cd ~`. Then type
+   `pwd`. The terminal must print your home folder: `/home/<you>` in WSL, `/Users/<you>`
+   on macOS. On Windows, a path that starts with `/mnt/c/` is the wrong place: go back to
+   Step 1.
 6. Type `git clone`, a space, and the address that you copied. Then type `cd ai-chatbot`.
-7. Open the folder `ai-chatbot` in VS Code. Type each command of this course in the
-   terminal inside VS Code.
+7. Windows: type `code .` in the same terminal. VS Code opens this folder, and the
+   bottom-left corner of the window shows "WSL: Ubuntu". macOS: open VS Code, then open
+   the folder `ai-chatbot` with **File**, **Open Folder**.
+8. From now on, type each command of this course in the terminal inside VS Code: **View**,
+   **Terminal**. On Windows that terminal is already inside WSL.
 
 ### Step 5: git identity and sign-in
 
