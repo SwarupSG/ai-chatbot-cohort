@@ -21,8 +21,25 @@ Confirm that you have:
   shows `(base)`, that is conda from an earlier module: leave it, the course's `.venv` is
   created on top of it.
 - A GitHub account, and a browser that is signed in to it.
-- This repository, created from the course template with "Use this template" and cloned
-  into your home folder: `/home/<you>/` in WSL, `/Users/<you>/` on macOS.
+- Your own copy of this repository, cloned into your home folder. Do not download the ZIP
+  file and do not clone the course repository itself: stage 9 pushes your work to GitHub
+  and Vercel builds from your account, so the repository must be yours. Five steps:
+  1. Open https://github.com/SwarupSG/ai-chatbot-cohort in the browser that is signed in
+     to GitHub.
+  2. Press **Use this template**, then **Create a new repository**. Name it `ai-chatbot`,
+     leave it Private, and press **Create repository**.
+  3. On the page of your new repository press **Code** and copy the address shown under
+     **HTTPS**.
+  4. In the terminal you will use for the course (WSL on Windows), run `cd ~` to go to
+     your home folder, `/home/<you>/` in WSL or `/Users/<you>/` on macOS. Then run
+     `git clone` followed by a space and the address you copied, then `cd ai-chatbot`.
+  5. Open that folder in VS Code; every command in this course is typed there.
+- Git knows who you are, and it can sign in to GitHub. `git config --global user.name`
+  and `git config --global user.email` each print a value; if one prints nothing, set it
+  with the same command followed by your name or your email address in quotes. The first
+  `git push` at stage 9 asks you to sign in to GitHub: when the terminal is the one inside
+  VS Code, a browser window opens and you press **Authorize**, and nothing is typed in the
+  terminal. Use the terminal inside VS Code for the whole course so that this works.
 - A Gemini key from Google AI Studio and an OpenRouter key, both saved where you can copy
   them. You paste the Gemini key into `.env` when the session asks for it, and the
   OpenRouter key at stage 6; paste neither before the session.

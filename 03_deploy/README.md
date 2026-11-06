@@ -25,7 +25,11 @@ answer, and the fix table at the end of this page names each case.
    send one message. Stop the server with Ctrl+C.
 3. Terminal 2, at the root: `git status`. The file `.env` must not be in the list. If it is,
    stop: the `.gitignore` line is missing, and the next step would upload your key.
-4. `git add .` then `git commit -m "chatbot with passphrase"` then `git push`.
+4. `git add .` then `git commit -m "chatbot with passphrase"` then `git push`. If this is
+   your first push, a browser window opens and asks you to sign in to GitHub; press
+   **Authorize** and return to the terminal. If the terminal asks for a password
+   instead, you are not in the terminal inside VS Code: open the folder in VS Code and
+   run `git push` again there.
 
 ## Part 2: put it on Vercel (10 minutes)
 
@@ -33,7 +37,7 @@ The labels below are the ones on the Vercel website in October 2026.
 
 1. Sign in at https://vercel.com with the GitHub account you used for the repository.
 2. Press **Add New**, then **Project**. In the list of your GitHub repositories, find the one
-   you created from the course template and press **Import**.
+   named `ai-chatbot`, the one you created from the course template, and press **Import**.
 3. On the import screen, leave the framework as Vercel detected it (Flask) and leave the
    root directory as it is. Do not press Deploy yet.
 4. Open the section **Environment Variables** on the same screen. For each of the four
