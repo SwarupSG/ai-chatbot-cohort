@@ -10,10 +10,16 @@ metadata:
 
 Since stage 1 your program has been the caller of an API. From stage 7 your program is the one that is called. The loop, the typed input and the appends are removed. A Flask route (one address the server answers), POST /chat, receives the whole history as JSON (text in a fixed format that browsers and servers both read). It adds the system entry, trims, calls the model and returns one reply with the tokens number. The server keeps nothing. test_chat.py is the caller that keeps the list and sends the four fixed turns.
 
-## Two lines a learner often asks about
+## The Flask lines a learner asks about
 
-- `@app.post("/chat")` is the line above the function; it tells Flask to run the function below it when a POST request arrives at the address /chat. Without it the function is never called.
+- Flask is a Python package that turns a function into an address a browser or a program can call. Four lines in app.py do that work; the rest of the file is stage 5.
+- `from flask import Flask, request` (line 11) loads the package; request holds what the caller sent.
+- `app = Flask(__name__)` (label 3) creates the server object.
+- `@app.post("/chat")` (label 4) is the line above the function; it tells Flask to run the function below it when a POST request arrives at the address /chat. Without it the function is never called.
+- `app.run(port=8000, debug=True)` (label 8) starts the server on the laptop; Vercel ignores it and starts the application its own way.
 - `request.get_json()["history"]` reads the body of the request as JSON and takes the value under the key history, which is the caller's list.
+- GET asks for a page; POST sends data. The route function is the body of the stage 5 loop without the typed input and the appends.
+- If a learner asks about applications that store data, or about CRUD: they use the same route mechanism with one route for each action and a database behind the routes. This chatbot stores nothing, so it has one route, and storage is outside the course.
 
 ## The predict question
 
