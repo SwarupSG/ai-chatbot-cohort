@@ -2,16 +2,21 @@
 
 ## The Modify menu
 
-Required, in this order:
+Do the six steps below in this order. Each step is required.
 
-1. In `app.py`, rewrite the system entry for a purpose of your own: who the assistant is, the facts it may use, and two rules.
+1. In `app.py`, write a new system entry for a purpose of your own. Write who the assistant is, the facts it can use, and two rules.
 2. In `index.html`, change the title and the greeting.
-3. In `test_chat.py`, write your own three memory turns: a fact in turn 1, and a question in turn 3 that needs that fact.
-4. Run it on your laptop once: `python app.py` in terminal 1, then `python test_chat.py` in terminal 2, both in a terminal whose prompt starts with `(.venv)`.
-5. Commit and push. In Vercel, open Settings, then Environment Variables, and change the three LLM values to your OpenRouter block, with a model name ending in `:free`. Press Save, then Redeploy from the Deployments page, as in `03_deploy/README.md`. A free model allows 20 requests a minute and 50 a day on an account with no credits, which is enough for this exercise.
-6. Post your link in the class channel with a note of three sentences: what you changed, what you kept, and why the kept lines must not change.
+3. In `test_chat.py`, write your own three memory turns. Put a fact in turn 1. Put a question in turn 3 that needs that fact.
+4. Run the app on your laptop one time. Type `python app.py` in terminal 1. Type `python test_chat.py` in terminal 2. The prompt of each terminal must start with `(.venv)`.
+5. Commit and push. In Vercel, open Settings, then Environment Variables. Change the three LLM values to your OpenRouter block, with a model name that ends in `:free`. Click Save. Then click Redeploy on the Deployments page, as in `03_deploy/README.md`. A free model permits 20 requests each minute and 50 each day on an account with no credits. That is sufficient for this exercise.
+6. Post your link in the class channel with a note of three sentences. Write what you changed, what you kept, and why the lines that you kept must not change.
 
-Optional, after the session: a language rule; a larger or smaller KEEP; saving the conversation to a file on your laptop; replacing dropped turns with a summary.
+After the session, you can do more. These changes are optional:
+
+- Add a language rule.
+- Make KEEP larger or smaller.
+- Save the conversation to a file on your laptop.
+- Replace the dropped turns with a summary.
 
 ## The reusable-code map
 

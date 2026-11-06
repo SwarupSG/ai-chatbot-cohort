@@ -1,19 +1,20 @@
 # Stage 9: deploy to Vercel
 
 Stage 9 is the three files at the root of this repository: `app.py`, `index.html` and
-`test_chat.py`. They sit at the root because Vercel runs the root. `app.py` is stage 8 plus
-the passphrase check, and `index.html` is stage 8 plus the passphrase prompt; the lines
-marked `NEW in stage 9` are the only lines that changed. Every message or error page you
-can meet on the way is listed in the table "If something is wrong" at the end of this page;
-look there first.
+`test_chat.py`. The files are at the root because Vercel runs the root. `app.py` is stage 8
+plus the passphrase check. `index.html` is stage 8 plus the passphrase prompt. The lines
+marked `NEW in stage 9` are the only lines that changed. The table "If something is wrong"
+at the end of this page lists each message and error page that you can see. Look there
+first.
 
 ## Why Vercel needs its own copy of the four values
 
-Your `.env` file is listed in `.gitignore`, so it was never uploaded to GitHub, and Vercel
-builds from GitHub. On Vercel, the same line `os.getenv("LLM_API_KEY")` reads the project's
-own environment settings instead of `.env`. The code does not change; the place the values
-are read from does. Until you enter the four values there, the deployed program cannot start, or cannot
-answer, and the fix table at the end of this page names each case.
+`.gitignore` lists your `.env` file. Thus git never uploaded `.env` to GitHub, and Vercel
+builds from GitHub. On Vercel, the same line `os.getenv("LLM_API_KEY")` reads the
+environment settings of the project, not `.env`. The code does not change. The place that
+the code reads the values from changes. Until you enter the four values there, the deployed
+program cannot start or cannot answer. The fix table at the end of this page names each
+case.
 
 ## Part 1: run it on your laptop first (5 minutes)
 
