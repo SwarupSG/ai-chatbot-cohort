@@ -6,8 +6,8 @@ on an OpenRouter free model. The folder lists `stage1.py` to `stage5.py` for tha
 
 ## What to do
 
-1. Open `.env` at the root. Put a `#` in front of the three active Gemini lines, and remove
-   the `#` from the three OpenRouter lines, so that exactly three lines are without a `#`:
+1. Open `.env` at the root. Put a `#` in front of the three active Gemini lines. Remove the
+   `#` from the three OpenRouter lines. Exactly three lines must be without a `#`:
 
    ```text
    LLM_BASE_URL=https://openrouter.ai/api/v1
@@ -15,17 +15,17 @@ on an OpenRouter free model. The folder lists `stage1.py` to `stage5.py` for tha
    LLM_MODEL=paste-a-model-name-ending-in-:free
    ```
 
-2. Paste your OpenRouter key after `LLM_API_KEY=`, and after `LLM_MODEL=` type the name of
-   a free model from https://openrouter.ai/models, which ends in `:free`. Three models that
-   passed the tests when this course was last checked are `nvidia/nemotron-3.5-lightning:free`,
-   `nvidia/nemotron-3.5-super-vl:free` and `liquid/lfm-2.5-2.6b:free`. Any of them may be
-   gone by the time you read this; the test of a model is whether the refusal sentence comes
-   back for the France question. Save the file.
-3. At the root, with `(.venv)` in the prompt, run `python 01_base/stage5.py` again. Type the
-   three memory test turns and then the France question, and tick the three tests on the
-   stage guide page as before.
-4. When the tests are done, put the `#` back in front of the three OpenRouter lines and
-   remove it from the three Gemini lines, so that stages 7 to 9 run on Gemini. The
+2. Paste your OpenRouter key after `LLM_API_KEY=`.
+3. After `LLM_MODEL=`, type the name of a free model from https://openrouter.ai/models.
+   The name ends in `:free`. Three models passed the tests at the last check of this
+   course: `nvidia/nemotron-3.5-lightning:free`, `nvidia/nemotron-3.5-super-vl:free` and
+   `liquid/lfm-2.5-2.6b:free`. A model can be gone when you read this. The test of a model
+   is this: the refusal sentence comes back for the France question. Save the file.
+4. At the root, with `(.venv)` in the prompt, type `python 01_base/stage5.py` again. Type
+   the three memory test turns, then the France question. Tick the three tests on the
+   stage guide page, as before.
+5. When the tests are complete, put the `#` back in front of the three OpenRouter lines.
+   Remove the `#` from the three Gemini lines. Then stages 7 to 9 run on Gemini. The
    OpenRouter block stays in the file for stage 10.
 
 ## What you should see

@@ -17,33 +17,34 @@ answer, and the fix table at the end of this page names each case.
 
 ## Part 1: run it on your laptop first (5 minutes)
 
-1. Open `.env` at the root and change its last line, `APP_PASSWORD=choose-a-word`, to a
-   word of your choice, for example `APP_PASSWORD=seaside`. Save the file.
-2. Terminal 1, at the root. Check that the prompt starts with `(.venv)`; if it does not,
-   run `source .venv/bin/activate` first. Then run `python app.py`. Open
-   http://localhost:8000 in the browser, enter your passphrase when the page asks, and
-   send one message. Stop the server with Ctrl+C.
-3. Terminal 2, at the root: `git status`. The file `.env` must not be in the list. If it is,
-   stop: the `.gitignore` line is missing, and the next step would upload your key.
-4. `git add .` then `git commit -m "chatbot with passphrase"` then `git push`. If this is
-   your first push, a browser window opens and asks you to sign in to GitHub; press
-   **Authorize** and return to the terminal. If the terminal asks for a password
-   instead, you are not in the terminal inside VS Code: open the folder in VS Code and
-   run `git push` again there.
+1. Open `.env` at the root. Change the last line, `APP_PASSWORD=choose-a-word`, to a word
+   of your choice, for example `APP_PASSWORD=seaside`. Save the file.
+2. In terminal 1, at the root, make sure that the prompt starts with `(.venv)`. If it does
+   not, type `source .venv/bin/activate` first.
+3. Type `python app.py`. Open http://localhost:8000 in the browser. Enter your passphrase
+   when the page asks for it. Send one message. Stop the server with Ctrl+C.
+4. In terminal 2, at the root, type `git status`. The file `.env` must not be in the list.
+   If `.env` is in the list, stop. The `.gitignore` line is missing, and the next step
+   would upload your key.
+5. Type `git add .`, then `git commit -m "chatbot with passphrase"`, then `git push`.
+6. If this is your first push, a browser window opens and asks you to sign in to GitHub.
+   Click **Authorize** and go back to the terminal. If the terminal asks for a password,
+   you are not in the terminal inside VS Code. Open the folder in VS Code and type
+   `git push` again there.
 
 ## Part 2: put it on Vercel (10 minutes)
 
-The labels below are the ones on the Vercel website in October 2026.
+The labels below are the labels on the Vercel website in October 2026.
 
-1. Sign in at https://vercel.com with the GitHub account you used for the repository.
-2. Press **Add New**, then **Project**. In the list of your GitHub repositories, find the one
-   named `ai-chatbot`, the one you created from the course template, and press **Import**.
-3. On the import screen, leave the framework as Vercel detected it (Flask) and leave the
-   root directory as it is. Do not press Deploy yet.
-4. Open the section **Environment Variables** on the same screen. For each of the four
-   values below, type the name in the **Key** box and the value in the **Value** box, then
-   press **Add**. Copy the values from your own `.env`; type the names exactly as shown,
-   with the underscores and in capitals.
+1. Sign in at https://vercel.com with the GitHub account of your repository.
+2. Click **Add New**, then **Project**. In the list of your GitHub repositories, find
+   `ai-chatbot`. Click **Import**.
+3. On the import screen, keep the framework that Vercel detected (Flask). Keep the root
+   directory as it is. Do not click Deploy yet.
+4. Open the section **Environment Variables** on the same screen. Add the four values
+   below one at a time: type the name in the **Key** box, type the value in the **Value**
+   box, and click **Add**. Copy each value from your own `.env`. Type each name exactly as
+   shown, with the underscores and in capitals.
 
    | Key | Value |
    |---|---|
@@ -52,32 +53,32 @@ The labels below are the ones on the Vercel website in October 2026.
    | `LLM_MODEL` | the model name from the same block |
    | `APP_PASSWORD` | the word you chose in Part 1 |
 
-5. Press **Deploy**. The build takes about one to three minutes. When it finishes, Vercel
-   shows a preview and a **Visit** button.
-6. Press **Visit**. The page asks for your passphrase; enter it and type the three memory
-   turns. The first reply takes a few seconds longer than the others, because Vercel starts
-   the program for the first request. If instead you see "This page is unavailable" with
-   the code FUNCTION_INVOCATION_FAILED, one of the three LLM values did not reach Vercel:
-   go to the next section.
-7. Copy the link from the browser's address bar. It is the project's own link, in the form
-   `https://<project-name>.vercel.app`. Post that link, and your passphrase, in the class
-   channel. Do not post the longer link with random letters in it: that one is a single
-   deployment, and visitors who are not signed in to Vercel cannot open it.
-8. In `test_chat.py`, change `ADDRESS` to your link followed by `/chat`, and `PASSPHRASE`
-   to the word you chose in Part 1. Run `python test_chat.py` at the root, in a terminal
-   whose prompt starts with `(.venv)`.
+5. Click **Deploy**. The build takes approximately one to three minutes. When the build is
+   complete, Vercel shows a preview and a **Visit** button.
+6. Click **Visit**. The page asks for your passphrase. Enter it, then type the three memory
+   turns. The first reply takes some seconds longer than the others, because Vercel starts
+   the program for the first request. If you see "This page is unavailable" with the code
+   FUNCTION_INVOCATION_FAILED, one of the three LLM values did not reach Vercel. Go to the
+   next section.
+7. Copy the link from the address bar of the browser. This is the link of the project, in
+   the form `https://<project-name>.vercel.app`. Post this link and your passphrase in the
+   class channel. Do not post the longer link with random letters. That link is one
+   deployment only, and visitors who are not signed in to Vercel cannot open it.
+8. In `test_chat.py`, change `ADDRESS` to your link followed by `/chat`. Change
+   `PASSPHRASE` to the word from Part 1. At the root, with `(.venv)` in the prompt, type
+   `python test_chat.py`.
 
 ## If you added the values after the first deploy
 
-This is also the section for the error page "This page is unavailable,
-FUNCTION_INVOCATION_FAILED": the program stopped because a value is missing on Vercel.
+This section is also for the error page "This page is unavailable,
+FUNCTION_INVOCATION_FAILED". The program stopped because a value is missing on Vercel.
 
-1. Open your project on Vercel, press **Settings**, then **Environment Variables** in the
-   left menu, and add or edit the values as in Part 2, step 4. Press **Save**.
-2. Press **Deployments** at the top, open the menu with three dots on the most recent
-   deployment, and press **Redeploy**. A changed value is read only by a new deployment.
-3. If you need the program's own error text, open the deployment and press **Logs**. On
-   the free plan the log is kept for one hour, so look soon after the error.
+1. Open your project on Vercel. Click **Settings**, then **Environment Variables** in the
+   left menu. Add or edit the values as in Part 2, step 4. Click **Save**.
+2. Click **Deployments** at the top. Open the menu with three dots on the most recent
+   deployment. Click **Redeploy**. Only a new deployment reads a changed value.
+3. If you need the error text of the program, open the deployment and click **Logs**. On
+   the free plan, Vercel keeps the log for one hour. Look soon after the error.
 
 ## If something is wrong
 
