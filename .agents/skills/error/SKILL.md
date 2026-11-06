@@ -31,7 +31,12 @@ that does not exist; and "Method Not Allowed" is the address `/chat` typed into 
 browser, which sends a GET to a route that answers POST. Two messages come from Python
 rather than the script: "can't open file" means the command was typed in the wrong
 folder, so the learner goes to the repository root, the folder that holds check.py; and
-"No module named" means the virtual environment is off in that terminal.
+"No module named" means the virtual environment is off in that terminal. A third comes from
+the requests package: "Connection refused" at the end of a long traceback from test_chat.py,
+with localhost and port 8000 in the message, means no server is running; the learner starts
+app.py (or 02_web/stage7/app.py) in a second terminal with (.venv) in the prompt, leaves it
+running, and runs test_chat.py again. The same message after stage 9 with localhost in it
+means ADDRESS in test_chat.py was not changed to the Vercel link.
 
 Do not type the corrected line; the learner types it. Never ask for or display the
 contents of `.env` or a key.

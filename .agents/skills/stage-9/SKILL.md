@@ -25,4 +25,4 @@ The key is in Vercel's environment settings and in the root .env on the laptop, 
 - Every reply starts 'The provider refused the request': one of the three LLM values is wrong in Vercel's settings; check the names and values against .env, then Redeploy.
 - The page says 'This page is unavailable' with FUNCTION_INVOCATION_FAILED: one of the three LLM values is missing, so the program stopped at the client line; add it, then Redeploy.
 - Every reply is 'The passphrase is wrong.': the value on Vercel, the word typed on the page, and PASSPHRASE in test_chat.py are not all the same.
-- The test client says Connection refused: the ADDRESS line in test_chat.py still holds the localhost address.
+- The test client says Connection refused with localhost in the message: either the ADDRESS line in test_chat.py still holds the localhost address, or, when the learner is still testing on the laptop, the server in terminal 1 is not running.

@@ -92,7 +92,7 @@ FUNCTION_INVOCATION_FAILED". The program stopped because a value is missing on V
 | Every reply is "The passphrase is wrong." | The passphrase sent does not match `APP_PASSWORD` on the server | Compare three places and make them the same: the value on Vercel, the word the page asked for, and `PASSPHRASE` in `test_chat.py` |
 | The page does not ask for a passphrase | An old build is open | Refresh after the new build finishes |
 | A page that says "This page is unavailable" with a code like FUNCTION_INVOCATION_FAILED | One of the three LLM values is missing, so the program stopped at the line that creates the client | Add the missing value in Settings, Environment Variables, then Redeploy |
-| `test_chat.py` says Connection refused | `ADDRESS` still points to localhost | Change it to your link followed by `/chat` |
+| `test_chat.py` says Connection refused, with localhost in the message | Before the deploy: the server in terminal 1 is not running. After the deploy: `ADDRESS` still points to localhost | Before the deploy, start `python app.py` in terminal 1. After the deploy, change `ADDRESS` to your link followed by `/chat` |
 
 After the session, revoke both keys on the providers' pages and create new ones when you
 next need them.
