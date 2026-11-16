@@ -14,7 +14,7 @@ Do the six steps below in this order. Each step is required.
 After the session, you can do more. These changes are optional:
 
 - Add a language rule.
-- Make KEEP larger or smaller.
+- Make KEEP larger or smaller. Do not set KEEP below 1.
 - Save the conversation to a file on your laptop.
 - Replace the dropped turns with a summary.
 

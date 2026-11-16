@@ -29,13 +29,16 @@ elif sys.version_info >= (3, 10):
     print("Python", version, "in the virtual environment - OK")
 else:
     print("Python", version, "- too old. The course needs Python 3.10 or newer.")
+    sys.exit()
 
 # 3. The folder: on Windows, everything must be inside WSL.
 folder = str(Path.cwd())
 if sys.platform == "win32":
     print("You are running Windows Python. Open this folder in WSL and run the script there.")
+    sys.exit()
 elif folder.startswith("/mnt/c/"):
     print("Working folder:", folder, "- this is the Windows side. Clone into your WSL home folder.")
+    sys.exit()
 else:
     print("Working folder:", folder, "- OK")
 

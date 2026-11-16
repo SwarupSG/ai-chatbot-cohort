@@ -40,7 +40,7 @@ app = Flask(__name__)
 # 3a. The page route, unchanged.
 @app.get("/")
 def page():
-    return Path(__file__).with_name("index.html").read_text()
+    return Path(__file__).with_name("index.html").read_text(encoding="utf-8")
 
 # 4. The chat route. The body now holds the history and the passphrase.
 @app.post("/chat")
@@ -50,15 +50,17 @@ def chat():
     # NEW in stage 9
     # 4b. The passphrase check. The passphrase is the fourth environment value.
     #     A missing value gets its own message, so that it is not read as a
-    #     wrong passphrase.
-    if not os.getenv("APP_PASSWORD"):
+    #     wrong passphrase. .strip() removes the spaces at the two ends.
+    password = os.getenv("APP_PASSWORD", "").strip()
+    if not password:
         reply = (
             "APP_PASSWORD is not set on this server. "
             + "Add it in .env on your laptop, "
             + "or in Environment Variables on Vercel."
         )
         return {"reply": reply, "tokens": "unknown"}, 401
-    if data.get("passphrase") != os.getenv("APP_PASSWORD"):
+    sent = str(data.get("passphrase") or "").strip()
+    if sent != password:
         return {"reply": "The passphrase is wrong.", "tokens": "unknown"}, 401
 
     history = data["history"]   # NEW in stage 9
@@ -77,12 +79,14 @@ def chat():
     except APIError as refused:
         reply = (
             "The provider refused the request: " + str(refused)
-            + " Check the three LLM values in .env on your laptop, or in Environment Variables in your Vercel project settings. If the message says rate limit, wait one minute and run again."
+            + " Check the three LLM values in .env on your laptop, or in Environment Variables in your Vercel project settings. If the message says rate limit, wait one minute and run again."   # NEW in stage 9: this message names Vercel too
         )
         return {"reply": reply, "tokens": "unknown"}
 
     # 7. Return one reply and the number of tokens sent. The server keeps
-    #    nothing.
+    #    nothing. A reply with no text gets a message in its place.
+    if not response.choices or not response.choices[0].message.content:
+        return {"reply": "The model sent no text. Send the turn again, or choose a different model.", "tokens": "unknown"}
     reply = response.choices[0].message.content
     tokens = response.usage.prompt_tokens if response.usage else "unknown"
     return {"reply": reply, "tokens": tokens}

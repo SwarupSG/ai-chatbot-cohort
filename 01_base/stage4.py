@@ -40,13 +40,17 @@ print("Goal: see the memory work. The list is kept and sent whole. Type the thre
 print("Memory test, turn 1: I plan to visit on Sunday with two friends. Do you serve tea?")
 print("Memory test, turn 2: Will you be open on the day I mentioned?")
 print("Memory test, turn 3: Will you have enough tea and cakes for all of us on that day?")   # NEW in stage 4
-input("Predict first: will turn 3 refer to the Sunday visit or the group of three, and will the tokens number grow? Write it down, then press Enter only.\n")
+typed = input("Predict first: will turn 3 refer to the Sunday visit or the group of three, and will the tokens number grow? Write it down, then press Enter only.\n")
+if typed != "":   # the pause sends nothing to the model
+    print("That line was not sent to the model. Type memory test turn 1 after You:")
 turn = 0   # counts the turns, so that the script can speak after the last test turn
 
 while True:
-    question = input("You: ")
-    if question == "quit":
+    question = input("You: ").strip()   # .strip() removes the spaces at the two ends
+    if question.lower() == "quit":      # .lower() makes Quit and QUIT end the loop too
         break
+    if question == "":
+        continue
 
     # 4. The typed turn joins the list.   # NEW in stage 4
     history.append({"role": "user", "content": question})
@@ -59,12 +63,17 @@ while True:
         )
     except APIError as refused:
         print("The provider refused the request:", refused)
-        print("Check the three LLM values in .env on your laptop, or in Environment Variables in your Vercel project settings. If the message says rate limit, wait one minute and run again.")
+        print("Check the three LLM values in .env. If the message says rate limit, wait one minute and run again.")
         history.pop()   # take the unanswered question back out of the list
         continue
 
     # NEW in stage 4
     # 6. The reply joins the list too; print it with the number of tokens sent.
+    #    A reply with no text does not join the list.
+    if not response.choices or not response.choices[0].message.content:
+        print("The model sent no text. Type the question again, or choose a different model in .env.")
+        history.pop()   # take the unanswered question back out of the list
+        continue
     reply = response.choices[0].message.content
     history.append({"role": "assistant", "content": reply})
     tokens = response.usage.prompt_tokens if response.usage else "unknown"

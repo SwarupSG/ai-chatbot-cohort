@@ -13,7 +13,7 @@ One route GET / sends the page. The page keeps the list in a JavaScript array na
 ## Two lines a learner often asks about
 
 - `await fetch("/chat", {...})` in index.html sends the request from the page and waits for the response. `body: JSON.stringify({ history })` turns the array into the JSON text the route reads with `request.get_json()`.
-- `Path(__file__).with_name("index.html").read_text()` under label 3a reads the page file that sits next to app.py and returns its text, which is why the page has no address of its own.
+- `Path(__file__).with_name("index.html").read_text(encoding="utf-8")` under label 3a reads the page file that sits next to app.py and returns its text, which is why the page has no address of its own. `encoding="utf-8"` makes the letter é correct on every laptop.
 
 ## The predict question
 
@@ -29,4 +29,5 @@ Open http://localhost:8000, type the three memory turns, and the memory test pas
 - '"GET /favicon.ico HTTP/1.1" 404' in the server log means the browser asked for a tab icon and there is none. 404 is the status number for not found; the page works without an icon.
 - A log line the learner did not cause, such as '"GET /health HTTP/1.1" 404' every thirty seconds, comes from a tool on the laptop (an editor or a browser tool that watches local servers) asking whether a server is alive. It is not a fault, and its absence means nothing on that laptop is polling. It is the learning moment of the log: the server answers every caller and cannot tell the page from any other caller, which is why stage 9 adds the passphrase and modification 3 checks the length before paying for a call.
 - If the page looks unchanged after an edit, refresh it.
+- A reply that starts 'The provider refused the request' or 'The model sent no text' joins the page's list as a reply. The next turn sends that message to the model. Refresh the page to start an empty list, then type the turns again. For test_chat.py, run the script again.
 - The page does not load: the server is not running, or the address is not localhost:8000.

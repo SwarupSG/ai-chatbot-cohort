@@ -15,8 +15,9 @@ metadata:
    environment is not on"; "too old. The course needs Python 3.10 or newer"; "this is the
    Windows side"; "You are running Windows Python"; "Package missing"; "LLM_API_KEY is not
    set yet"; "The provider refused the key"; "The provider refused the request"; "I can
-   only help with questions about the café."; "tokens sent: unknown"; "APP_PASSWORD is not
-   set on this server"; and "The passphrase is wrong."
+   only help with questions about the café."; "tokens sent: unknown"; "That line was not
+   sent to the model"; "The model sent no text"; "KEEP must be 1 or more"; "APP_PASSWORD is
+   not set on this server"; and "The passphrase is wrong."
 4. One bullet says in words what change would fix it, for example "move the line that
    creates history above the while line" or "run source .venv/bin/activate in this
    terminal, then the command again". A last bullet asks whether that matches what they
@@ -34,7 +35,11 @@ second terminal instead; and "Method Not Allowed" is the address `/chat` typed i
 browser, which sends a GET to a route that answers POST. Two messages come from Python
 rather than the script: "can't open file" means the command was typed in the wrong
 folder, so the learner goes to the repository root, the folder that holds check.py; and
-"No module named" means the virtual environment is off in that terminal. A third comes from
+"No module named" means the virtual environment is off in that terminal. A long traceback
+that ends with "Missing credentials" comes from the openai package: no line that starts with
+LLM_API_KEY is active in .env, so the learner removes the # from the three lines of one
+block. "Bot: None" in stages 1 to 3, or "IndexError: list index out of range" at the line
+with choices[0], means the model sent no text; the learner runs the script again. A third comes from
 the requests package: "Connection refused" at the end of a long traceback from test_chat.py,
 with localhost and port 8000 in the message, means no server is running; the learner starts
 app.py (or 02_web/stage7/app.py) in a second terminal with (.venv) in the prompt, leaves it

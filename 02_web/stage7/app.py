@@ -55,12 +55,14 @@ def chat():
     except APIError as refused:
         reply = (
             "The provider refused the request: " + str(refused)
-            + " Check the three LLM values in .env on your laptop, or in Environment Variables in your Vercel project settings. If the message says rate limit, wait one minute and run again."
+            + " Check the three LLM values in .env. If the message says rate limit, wait one minute and run again."
         )
         return {"reply": reply, "tokens": "unknown"}
 
     # 7. Return one reply and the number of tokens sent. The server keeps
-    #    nothing.
+    #    nothing. A reply with no text gets a message in its place.
+    if not response.choices or not response.choices[0].message.content:
+        return {"reply": "The model sent no text. Send the turn again, or choose a different model.", "tokens": "unknown"}
     reply = response.choices[0].message.content
     tokens = response.usage.prompt_tokens if response.usage else "unknown"
     return {"reply": reply, "tokens": tokens}

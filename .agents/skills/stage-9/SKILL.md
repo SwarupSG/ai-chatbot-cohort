@@ -8,7 +8,7 @@ metadata:
 
 ## What this stage adds
 
-A passphrase check. The page asks the visitor for a passphrase once and sends it with every request. The route answers 'The passphrase is wrong.' with status 401 when it does not match APP_PASSWORD. These are the files Vercel runs; the four values are set in Vercel's project settings.
+A passphrase check. The page asks the visitor for a passphrase once and sends it with every request. The route answers 'The passphrase is wrong.' with status 401 when it does not match APP_PASSWORD. The route removes the spaces at the two ends of both texts before it compares them. These are the files Vercel runs; the four values are set in Vercel's project settings.
 
 ## The predict question
 
@@ -25,4 +25,5 @@ The key is in Vercel's environment settings and in the root .env on the laptop, 
 - Every reply starts 'The provider refused the request': one of the three LLM values is wrong in Vercel's settings; check the names and values against .env, then Redeploy.
 - The page says 'This page is unavailable' with FUNCTION_INVOCATION_FAILED: one of the three LLM values is missing, so the program stopped at the client line; add it, then Redeploy.
 - Every reply is 'The passphrase is wrong.': the value on Vercel, the word typed on the page, and PASSPHRASE in test_chat.py are not all the same.
+- The passphrase check has four limits. A caller can guess as many times as it wants. A caller that knows the passphrase can add a system entry of its own to the list. The route does not limit the length of an entry. A body with no key named history gets an error page with status 500, not a message.
 - The test client says Connection refused with localhost in the message: either the ADDRESS line in test_chat.py still holds the localhost address, or, when the learner is still testing on the laptop, the server in terminal 1 is not running.

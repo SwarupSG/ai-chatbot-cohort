@@ -34,15 +34,20 @@ system_entry = {
 print("Goal: see that a list built again on every turn has no memory. Type the two turns below in this order; turn 2 should fail.")
 print("Memory test, turn 1: I plan to visit on Sunday with two friends. Do you serve tea?")
 print("Memory test, turn 2: Will you be open on the day I mentioned?")
-input("Predict first: what will the model say to turn 2? Write it down, then press Enter only.\n")
+typed = input("Predict first: what will the model say to turn 2? Write it down, then press Enter only.\n")
+if typed != "":   # the pause sends nothing to the model
+    print("That line was not sent to the model. Type memory test turn 1 after You:")
 turn = 0   # counts the turns, so that the script can speak after the last test turn
 
 # NEW in stage 3
 # 3. One turn per loop: take a typed question; the word quit ends the loop.
+#    An empty line is not sent.
 while True:
-    question = input("You: ")
-    if question == "quit":
+    question = input("You: ").strip()   # .strip() removes the spaces at the two ends
+    if question.lower() == "quit":      # .lower() makes Quit and QUIT end the loop too
         break
+    if question == "":
+        continue
 
     # NEW in stage 3
     # 4. Build the list again every turn, so turn 1 is gone on turn 2.
@@ -54,7 +59,7 @@ while True:
         )
     except APIError as refused:
         print("The provider refused the request:", refused)
-        print("Check the three LLM values in .env on your laptop, or in Environment Variables in your Vercel project settings. If the message says rate limit, wait one minute and run again.")
+        print("Check the three LLM values in .env. If the message says rate limit, wait one minute and run again.")
         continue
 
     # 5. Print the reply.

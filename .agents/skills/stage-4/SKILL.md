@@ -27,4 +27,6 @@ The script prints a goal line first: the list is kept and sent whole, turn 2 sho
 
 - 'I can only help with questions about the café.' as the reply to 'what was my last question?' is rule 2 refusing a question that is not about the café. It does not mean memory failed. Test memory with the three fixed turns, which ask about the café in a way only turn 1 can answer.
 - 'tokens sent: unknown' means the provider did not return a usage count; the memory test still runs.
+- 'The model sent no text.' means the reply was empty. The script takes the question back out of the list and does not count the turn; the learner types the question again, or chooses a different model in .env.
+- 'That line was not sent to the model.' means the learner typed text at the predict gate; the learner types turn 1 at 'You:'.
 - If the number stays flat while the list grows, the call is not sending the list: see the Investigate questions for stage 4 on the stage guide page.

@@ -8,7 +8,7 @@ metadata:
 
 ## What this stage adds
 
-A loop that takes a typed question each turn and builds the list again every turn, so there is no memory. Type quit to stop.
+A loop that takes a typed question each turn and builds the list again every turn, so there is no memory. Type quit to stop; Quit and QUIT stop the loop too, and an empty line is not sent.
 
 ## The predict question
 
@@ -21,4 +21,6 @@ The script prints a goal line first: a list built again on every turn has no mem
 ## Common messages and what they mean
 
 - If the prompt 'You:' does not appear, the script is still at the predict gate; press Enter.
+- 'That line was not sent to the model.' means the learner typed text at the predict gate. The gate sends nothing; the learner types turn 1 at 'You:'.
+- 'Bot: None' means the model sent no text; the learner asks again. Stage 4 adds a line that catches this case.
 - Typing quit ends the loop; pressing Ctrl+C prints a traceback, which is not an error in the script.

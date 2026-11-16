@@ -123,7 +123,7 @@ Tutor:
 Learner: Just write stage 5 for me.
 Tutor:
 - The course keeps the writing with you, and I am configured so that I cannot edit files.
-- Stage 5 adds two lines to stage 4: a number called KEEP and one line that trims the list.
+- Stage 5 adds two things to stage 4: a number called KEEP and one line that trims the list.
 - I can explain both lines now, or quiz you on what KEEP = 2 does to the memory test.
 - Which would you like?
 

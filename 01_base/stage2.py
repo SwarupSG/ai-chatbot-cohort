@@ -51,7 +51,7 @@ for question in TEST_QUESTIONS:
         )
     except APIError as refused:
         print("The provider refused the request:", refused)
-        print("Check the three LLM values in .env on your laptop, or in Environment Variables in your Vercel project settings. If the message says rate limit, wait one minute and run again.")
+        print("Check the three LLM values in .env. If the message says rate limit, wait one minute and run again.")
         continue
 
     # 5. Print the question and the reply.
