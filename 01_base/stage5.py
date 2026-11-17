@@ -38,7 +38,7 @@ if KEEP < 1:   # the model must receive the new question, so 1 is the smallest v
     raise SystemExit("KEEP must be 1 or more.")
 
 # 2b. The memory test: type these three turns in this order, then type quit.
-print("Goal: see what the trim does to the memory. KEEP is", KEEP, "in this run. At KEEP = 2, the model receives the system entry, the previous reply and your new question. Turn 2 should fail, or turn 3 if reply 1 repeated Sunday. Type the three turns below in this order.")   # NEW in stage 5
+print("Goal: see what the trim does to the memory. KEEP is", KEEP, "in this run. At KEEP = 2, the model receives the system entry, the previous reply and your new question. It does not receive your earlier questions. Type the three turns below in this order.")   # NEW in stage 5
 print("Memory test, turn 1: I plan to visit on Sunday with two friends. Do you serve tea?")
 print("Memory test, turn 2: Will you be open on the day I mentioned?")
 print("Memory test, turn 3: Will you have enough tea and cakes for all of us on that day?")
@@ -87,5 +87,7 @@ while True:
     turn = turn + 1
     if turn == 3:   # NEW in stage 5
         print("That was turn 3. KEEP is", KEEP, "in this run.")
-        print("At KEEP = 2, turn 2 should fail, or turn 3 if reply 1 repeated Sunday. At KEEP = 6, each turn should pass, and the tokens number is higher but under 300. If KEEP is 2, change the line KEEP = 2 to KEEP = 6 and run again. Type quit.")
+        print("Check the replies. Turn 2 passes if the reply names Sunday. Turn 3 passes if the reply names Sunday or three people.")
+        print("At KEEP = 2, the model receives the previous reply and your new question, and no earlier question. A fact from an earlier turn is lost, unless the previous reply repeats it.")
+        print("If KEEP is 2, change the line KEEP = 2 to KEEP = 6 and run again. At KEEP = 6, each turn should pass, and the tokens number is higher but under 300. Type quit.")
 
